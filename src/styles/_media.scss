@@ -1,0 +1,37 @@
+// Breakpoint prefix	Minimum width	CSS
+$xsm : 375px;
+$sm: 576px; // Phones
+$md: 768px; // tablets
+$lg: 1024px; // Laptops
+$xl: 1280px; // Monitors
+
+@mixin respond-xsm {
+    @media (min-width: $xsm) {
+      @content;
+    }
+  }
+
+@mixin respond-sm {
+    @media (min-width: $sm) {
+      @content;
+    }
+  }
+  
+  @mixin respond-md {
+    @media (min-width: $md) {
+      @content;
+    }
+  }
+  
+  @mixin respond-lg {
+    @media (min-width: $lg) {
+      @content;
+    }
+  }
+  
+  @mixin respond-xl {
+    @media (min-width: $xl) {
+      @content;
+    }
+  }
+

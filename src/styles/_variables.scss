@@ -1,0 +1,75 @@
+$font-primary: "Inter", sans-serif;
+$font-secondary: "Oxygen mono", monospace;
+$font-size: 1rem;
+$font-weight: 400;
+
+$color-navBg-light: white;
+$color-navBg-dark: black;
+
+$color-heading-light: black;
+$color-text-light: black;
+$color-bg-light: white;
+
+$color-heading-dark: white;
+$color-text-dark: white;
+$color-bg-dark: black;
+
+$card-imageBg-light: #e2f6f5;
+$card-imageBg-dark: grey;
+
+$color-skillsSVG-light: black;
+$color-skillsSVG-dark: white;
+
+
+$color-footerBg-light: black;
+$color-footerBg-dark: white;
+$color-footerText-light: white;
+$color-footerText-dark: black;
+$color-footerSvgBg-light: white;
+$color-footerSvgBg-dark: black;
+$color-footerSvg-light: black;
+$color-footerSvg-dark: white;
+
+$color-hover-light: orange;
+$color-hover-dark: grey;
+
+:root {
+  --color-heading: #{$color-heading-light};
+  --color-text: #{$color-text-light};
+
+  --color-bg: #{$color-bg-light};
+
+  --color-navBg: #{$color-navBg-light};
+
+  --card-imageBg: #{$card-imageBg-light};
+
+  --color-skillsSvg: #{$color-skillsSVG-light};
+
+  --color-footerBg: #{$color-footerBg-light};
+  --color-footerText: #{$color-footerText-light};
+  --color-footerSvgBg: #{$color-footerSvgBg-light};
+  --color-footerSvg: #{$color-footerSvg-light};
+
+  --color-hover: #{$color-hover-light};
+}
+
+[data-theme="dark"] {
+  --color-heading: #{$color-heading-dark};
+  --color-text: #{$color-text-dark};
+
+  --color-bg: #{$color-bg-dark};
+
+  --color-navBg: #{$color-navBg-dark};
+
+  --card-imageBg: #{$card-imageBg-dark};
+
+  --color-skillsSvg: #{$color-skillsSVG-dark};
+
+  --color-footerBg: #{$color-footerBg-dark};
+  --color-footerText: #{$color-footerText-dark};
+  --color-footerSvgBg: #{$color-footerSvgBg-dark};
+  --color-footerSvg: #{$color-footerSvg-dark};
+
+  --color-hover: #{$color-hover-dark};
+}
+
