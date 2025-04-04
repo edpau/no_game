@@ -27,16 +27,31 @@ const squareClassNames: Record<number, string> = {
 };
 
 // add gameMap into DOM
-gameMap.forEach((row) => {
-  const rowEl = document.createElement("div");
-  rowEl.classList.add("board__row");
 
-  row.forEach((value) => {
-    const squareEl = document.createElement("div");
-    const squareClassName = squareClassNames[value] ?? "board__square--error";
-    squareEl.classList.add("board__square", squareClassName);
+function createBoard(boardEl: HTMLDivElement): HTMLDivElement[][] {
+  const board: HTMLDivElement[][] = [];
+  gameMap.forEach((row) => {
+    const rowEl = document.createElement("div");
+    rowEl.classList.add("board__row");
+    const rowArr: HTMLDivElement[] = [];
 
-    rowEl.appendChild(squareEl);
+    row.forEach((value) => {
+      const squareEl = document.createElement("div");
+      const squareClassName = squareClassNames[value] ?? "board__square--error";
+      squareEl.classList.add("board__square", squareClassName);
+
+      rowEl.appendChild(squareEl);
+      rowArr.push(squareEl);
+    });
+    boardEl.appendChild(rowEl);
+    board.push(rowArr);
   });
-  boardEl.appendChild(rowEl);
-});
+  return board;
+}
+
+
+// start game
+// 
+let board: HTMLDivElement[][] = createBoard(boardEl);
+console.log(board);
+console.log((board[8][5].style.backgroundColor = "pink"));
