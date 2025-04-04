@@ -7,25 +7,26 @@
 // gameMap board
 
 .board {
+  &__row {
+    display: flex;
+  }
 
-    &__row{
-        display: flex;
+  &__square {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+
+    &--floor {
+      background-color: aqua;
     }
-
-    &__square {
-        width: 20px;
-        height: 20px;
-        background-color: blue;
-
-        &--floor {
-            background-color: aqua;
-        }
-        &--wall{
-            background-color: brown;
-        }
-        &--error{
-            background-color: red;
-        }
+    &--boundary {
+        background-color: grey;
     }
-
+    &--wall {
+      background-color: brown;
+    }
+    &--error {
+      background-color: red;
+    }
+  }
 }
