@@ -3,3 +3,29 @@
 @use "./accessibility";
 @use "./media";
 @use "./variables" as vars;
+
+// gameMap board
+
+.board {
+
+    &__row{
+        display: flex;
+    }
+
+    &__square {
+        width: 20px;
+        height: 20px;
+        background-color: blue;
+
+        &--floor {
+            background-color: aqua;
+        }
+        &--wall{
+            background-color: brown;
+        }
+        &--error{
+            background-color: red;
+        }
+    }
+
+}
