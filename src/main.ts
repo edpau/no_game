@@ -1,6 +1,5 @@
 import "./styles/main.scss";
-
-import { delay } from "./utlity/helper";
+import Bullet from "./components/Bullets";
 
 const boardEl = document.querySelector<HTMLDivElement>(".screen__board");
 const btnUpEl = document.querySelector<HTMLButtonElement>("#dUp");
@@ -148,102 +147,36 @@ function fireBullet(tankPos: TankPos, tankFireDirection: TankFireDirection) {
 
   // TODO refactor this, code repeat
   if (tankFireDirection === "up") {
-    const bullet = new Bullet({ x, y: y });
+    const bullet = new Bullet({ x, y: y }, board);
     bullet.create();
     bullet.move("up");
   } else if (
     tankFireDirection === "down" &&
     board[y + 1][x].classList.contains("board__square--road")
   ) {
-    const bullet = new Bullet({ x, y: y + 1 });
+    const bullet = new Bullet({ x, y: y + 1 }, board);
     bullet.create();
   } else if (
     tankFireDirection === "left" &&
     board[y][x - 1].classList.contains("board__square--road")
   ) {
-    const bullet = new Bullet({ x: x - 1, y });
+    const bullet = new Bullet({ x: x - 1, y }, board);
     bullet.create();
   } else if (
     tankFireDirection === "right" &&
     board[y][x + 1].classList.contains("board__square--road")
   ) {
-    const bullet = new Bullet({ x: x + 1, y });
+    const bullet = new Bullet({ x: x + 1, y }, board);
     bullet.create();
   }
 }
 
-// Bullet
 
-// Todo type bulletPos and TankPos, make it in general Pos?
-
-type Pos = { x: number; y: number };
-
-class Bullet {
-  #pos: Pos;
-  constructor(pos: Pos) {
-    this.#pos = pos;
-  }
-
-  create() {
-    board[this.pos.y][this.pos.x].classList.add("bullet");
-    // bulletPool.push(this)
-  }
-
-  async move(tankFireDirection: TankFireDirection) {
-    // let { x, y } = this.pos;
-    if (tankFireDirection === "up") {
-      if (this.#pos.y - 1 < 0) {
-        board[this.#pos.y][this.#pos.x].classList.add("bullet");
-        await delay(20);
-        board[this.#pos.y][this.#pos.x].classList.remove("bullet");
-      } else if (
-        board[this.#pos.y - 1][this.#pos.x].classList.contains(
-          "board__square--road"
-        )
-      ) {
-        await delay(20);
-        board[this.#pos.y][this.#pos.x].classList.remove("bullet");
-        board[this.#pos.y - 1][this.#pos.x].classList.add("bullet");
-        this.#pos = { x: this.#pos.x, y: this.#pos.y - 1 };
-        this.move("up");
-      } else if (
-        board[this.#pos.y - 1][this.#pos.x].classList.contains(
-          "board__square--wall"
-        )
-      ) {
-        board[this.#pos.y - 1][this.#pos.x].classList.remove(
-          "board__square--wall"
-        );
-        board[this.#pos.y - 1][this.#pos.x].classList.add(
-          "board__square--road"
-        );
-        board[this.#pos.y][this.#pos.x].classList.remove("bullet");
-      } else if (
-        board[this.#pos.y - 1][this.#pos.x].classList.contains(
-          "board__square--boundary"
-        )
-      ) {
-        board[this.#pos.y][this.#pos.x].classList.add("bullet");
-        await delay(20);
-        board[this.#pos.y][this.#pos.x].classList.remove("bullet");
-      }
-    }
-  }
-
-  destory() {
-    // create bullet pool array or bullet list
-  }
-
-  get pos() {
-    return this.#pos;
-  }
-}
 
 // start game
 const board: HTMLDivElement[][] = createBoard(boardEl);
 let tankCurrentPos = createTank({ x: 5, y: 8 });
 let tankFireDir: TankFireDirection = "up";
-
 
 // TODO game data, take away later
 const directionDataEl = document.querySelector("#fireD");
