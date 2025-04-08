@@ -1,5 +1,6 @@
 import "./styles/main.scss";
-import Bullet from "./components/Bullets";
+
+import Tank from "./components/Tank";
 
 const boardEl = document.querySelector<HTMLDivElement>(".screen__board");
 const btnUpEl = document.querySelector<HTMLButtonElement>("#dUp");
@@ -74,109 +75,12 @@ function createBoard(boardEl: HTMLDivElement): HTMLDivElement[][] {
   return board;
 }
 
-// tank function
-
-// TODO move type to separate file?
-type TankPos = { x: number; y: number };
-type TankFireDirection = "up" | "down" | "left" | "right";
-
-function createTank(position: TankPos): {
-  x: number;
-  y: number;
-} {
-  board[position.y][position.x].classList.add("tank");
-  return position;
-}
-
-// TODO repeat code moveUp/ moveDown / moveLeft / moveRight make it simple?
-
-function moveUp(tankPos: TankPos): TankPos {
-  const { x, y } = tankPos;
-
-  if (y - 1 < 0) return tankPos;
-
-  if (board[y - 1][x].classList.contains("board__square--road")) {
-    board[y][x].classList.remove("tank");
-    board[y - 1][x].classList.add("tank");
-    return { x: x, y: y - 1 };
-  }
-  return tankPos;
-}
-
-function moveDown(tankPos: TankPos): TankPos {
-  const { x, y } = tankPos;
-
-  if (y + 1 >= board.length) return tankPos;
-
-  if (board[y + 1][x].classList.contains("board__square--road")) {
-    board[y][x].classList.remove("tank");
-    board[y + 1][x].classList.add("tank");
-    return { x: x, y: y + 1 };
-  }
-  return tankPos;
-}
-
-function moveLeft(tankPos: TankPos): TankPos {
-  const { x, y } = tankPos;
-
-  if (x - 1 < 0) return tankPos;
-
-  if (board[y][x - 1].classList.contains("board__square--road")) {
-    board[y][x].classList.remove("tank");
-    board[y][x - 1].classList.add("tank");
-    return { x: x - 1, y: y };
-  }
-  return tankPos;
-}
-
-function moveRight(tankPos: TankPos): TankPos {
-  const { x, y } = tankPos;
-
-  if (x + 1 >= board[0].length) return tankPos;
-
-  if (board[y][x + 1].classList.contains("board__square--road")) {
-    board[y][x].classList.remove("tank");
-    board[y][x + 1].classList.add("tank");
-    return { x: x + 1, y: y };
-  }
-  return tankPos;
-}
-
-function fireBullet(tankPos: TankPos, tankFireDirection: TankFireDirection) {
-  let { x, y } = tankPos;
-
-  // TODO refactor this, code repeat
-  if (tankFireDirection === "up") {
-    const bullet = new Bullet({ x, y: y }, board);
-    bullet.create();
-    bullet.move("up");
-  } else if (
-    tankFireDirection === "down" &&
-    board[y + 1][x].classList.contains("board__square--road")
-  ) {
-    const bullet = new Bullet({ x, y: y + 1 }, board);
-    bullet.create();
-  } else if (
-    tankFireDirection === "left" &&
-    board[y][x - 1].classList.contains("board__square--road")
-  ) {
-    const bullet = new Bullet({ x: x - 1, y }, board);
-    bullet.create();
-  } else if (
-    tankFireDirection === "right" &&
-    board[y][x + 1].classList.contains("board__square--road")
-  ) {
-    const bullet = new Bullet({ x: x + 1, y }, board);
-    bullet.create();
-  }
-}
-
-
-
 // start game
 const board: HTMLDivElement[][] = createBoard(boardEl);
-let tankCurrentPos = createTank({ x: 5, y: 8 });
-let tankFireDir: TankFireDirection = "up";
+
+const tank = new Tank({ x: 5, y: 8 }, board);
+
+
 
 // TODO game data, take away later
 const directionDataEl = document.querySelector("#fireD");
@@ -186,59 +90,59 @@ if (!directionDataEl) {
 
 // Event Listener - direction btn
 btnUpEl.addEventListener("click", () => {
-  tankCurrentPos = moveUp(tankCurrentPos);
+  tank.moveUp();
 });
 
 btnDownEl.addEventListener("click", () => {
-  tankCurrentPos = moveDown(tankCurrentPos);
+  tank.moveDown();
 });
 
 btnLeftEl.addEventListener("click", () => {
-  tankCurrentPos = moveLeft(tankCurrentPos);
+  tank.moveLeft();
 });
 
 btnRightEl.addEventListener("click", () => {
-  tankCurrentPos = moveRight(tankCurrentPos);
+  tank.moveRight();
 });
 
 btnFireEl.addEventListener("click", () => {
-  fireBullet(tankCurrentPos, tankFireDir);
+  tank.fireBullet();
 });
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
   switch (event.code) {
     case "KeyW":
-      tankCurrentPos = moveUp(tankCurrentPos);
+      tank.moveUp();
       break;
     case "KeyS":
-      tankCurrentPos = moveDown(tankCurrentPos);
+      tank.moveDown();
       break;
     case "KeyA":
-      tankCurrentPos = moveLeft(tankCurrentPos);
+      tank.moveLeft();
       break;
     case "KeyD":
-      tankCurrentPos = moveRight(tankCurrentPos);
+      tank.moveRight();
       break;
     case "KeyF":
-      fireBullet(tankCurrentPos, tankFireDir);
+      tank.fireBullet();
       break;
 
     // TODO need to make a function to make it simple and it need to be reuse for other tank
     case "KeyI":
-      tankFireDir = "up";
-      directionDataEl.textContent = tankFireDir;
+      tank.fireDir= "up"
+      directionDataEl.textContent = tank.fireDir
       break;
     case "KeyK":
-      tankFireDir = "down";
-      directionDataEl.textContent = tankFireDir;
+      tank.fireDir = "down";
+      directionDataEl.textContent = tank.fireDir
       break;
     case "KeyJ":
-      tankFireDir = "left";
-      directionDataEl.textContent = tankFireDir;
+      tank.fireDir = "left";
+      directionDataEl.textContent = tank.fireDir
       break;
     case "KeyL":
-      tankFireDir = "right";
-      directionDataEl.textContent = tankFireDir;
+      tank.fireDir = "right";
+      directionDataEl.textContent = tank.fireDir
       break;
   }
 });
@@ -246,21 +150,21 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
 // Event Listener - fire direction
 // TODO need to make a function to make it simple and it need to be reuse for other tank
 btnFDUpEl.addEventListener("click", () => {
-  tankFireDir = "up";
-  directionDataEl.textContent = tankFireDir;
+  tank.fireDir = "up";
+  directionDataEl.textContent = tank.fireDir
 });
 
 btnFDDownEl.addEventListener("click", () => {
-  tankFireDir = "down";
-  directionDataEl.textContent = tankFireDir;
+  tank.fireDir = "down";
+  directionDataEl.textContent = tank.fireDir
 });
 
 btnFDLeftEl.addEventListener("click", () => {
-  tankFireDir = "left";
-  directionDataEl.textContent = tankFireDir;
+  tank.fireDir = "left";
+  directionDataEl.textContent = tank.fireDir
 });
 
 btnFDRightEl.addEventListener("click", () => {
-  tankFireDir = "right";
-  directionDataEl.textContent = tankFireDir;
+  tank.fireDir = "right";
+  directionDataEl.textContent = tank.fireDir
 });
