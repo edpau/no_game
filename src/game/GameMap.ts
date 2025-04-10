@@ -16,7 +16,7 @@ const squareClassNames: Record<number, string> = {
   0: "board__square--road",
   1: "board__square--boundary",
   2: "board__square--wall",
-} as const;
+};
 
 export default class GameMap {
   #board: HTMLDivElement[][] = [];
@@ -47,9 +47,7 @@ export default class GameMap {
     return board;
   }
 
-  get board(){
-    return this.#board
+  get board() {
+    return this.#board;
   }
 }
-
-
