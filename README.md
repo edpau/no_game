@@ -41,7 +41,7 @@ https://edpau.github.io/no_game/
 - [x] Make the tank move around on the map
 - [x] Make tank can shoot bullet
 - [x] Make tank can shoot though walls one by one so it can walk pass it
-- [ ] Restart the game
+- [x] Restart the game
 - [ ] Make tank reach a flag and end the game
 
 ### Create a small map
@@ -108,14 +108,14 @@ I think as constant may be better.
 - it can reuse in other tank
 - [x] make bullet class
 - one bullet destroy one wall
-- [ ] make condition inside bullet move function
+- [x] make condition inside bullet move function
 - After it hit something, turn it to null, trigger garbage collect?
 - each bullet has its own state, and it will disappear after it hit something,
   if we keep track of its own position, how can we clean it, to avoid memory leak (MVP, I am not tracking the position outside the object, so no need to clean up, it will be cleaned up by JS)
   I think the same logic can apply to tank, what happen if it get destroyed. (develop it later)
 - what if two bullet hit each other? pass though to keep it simple. (only one tank in MVP, develop it later)
 - [x] need to make bullet movement visible, add/ remove class can happen very fast (made a help function, delay)
-- [ ]what if fire player too fast, need to slow down each shoot. Need to slow down clicking the screen or keyboard
+
 - later i need to upgrade it what happen it hit another tank
 
 ##### How bullet move
@@ -143,14 +143,14 @@ I think as constant may be better.
 
 1. board state reset
 
-### Tank State
+### [x]Tank State
 
-1. Tank position reset to starting position
-2. Tank aim direction reset to up
+1. [x]Tank position reset to starting position
+2. [x]Tank aim direction reset to up
 
 ### Bullet State
 
-1. I am not tracking the bullet state, so I need a time out to clear all the bullet in the game, and not let user to shoot the bullet when the state is restarting. (Later I found out I removed the gameMap and not holding the bullet state, I don't need to make a time out)
+1. [x]I am not tracking the bullet state, so I need a time out to clear all the bullet in the game, and not let user to shoot the bullet when the state is restarting. (Later I found out I removed the gameMap and not holding the bullet state, I don't need to make a time out)
 
 ## Game State
 
@@ -208,6 +208,7 @@ board pos add class function general function later
 - [ ] Change index.html title
 - [ ] Change index.html fibicon
 - [ ] add back accessibility on button
+- [ ]what if fire player too fast, need to slow down each shoot. Need to slow down clicking the screen or keyboard
 
 ## Deadline : Apr 16th
 
@@ -376,7 +377,7 @@ for (const [key, el] of Object.entries(controllerEls)) {
 4/9
 
 - [x] refactor: extract gameMap data and board rendering logic to GameMap.ts
-- [ ] Restart state, 
+- [x] Restart state, 
 - [ ] make Flag and end game
 - [ ] update error handle in element in ts
 
