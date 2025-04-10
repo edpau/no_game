@@ -101,8 +101,9 @@ export default class Tank {
 
   reset(board: HTMLDivElement[][]) {
     this.undraw(this.#position);
-    this.#board= board;
+    this.#board = board;
     this.#position = this.#startingPosition;
+    this.#fireDirection = "up";
     this.draw(this.#position);
   }
 }
