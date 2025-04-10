@@ -328,3 +328,8 @@ for (const [key, el] of Object.entries(controllerEls)) {
 - I realized after refactor function to Tank class, the function is more simple, it is more easy to control the tank state. It is inside its own scope.
 
 # TODO today
+
+
+## Quick idea
+- use enum for direction?
+- update error handle for element
