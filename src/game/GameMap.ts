@@ -1,4 +1,3 @@
-// map
 const gameMap: number[][] = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -20,9 +19,11 @@ const squareClassNames: Record<number, string> = {
 
 export default class GameMap {
   #board: HTMLDivElement[][] = [];
+  #boardEl: HTMLDivElement;
 
   constructor(boardEl: HTMLDivElement) {
-    this.#board = this.create(boardEl);
+    this.#boardEl = boardEl;
+    this.#board = this.create(this.#boardEl);
   }
 
   create(boardEl: HTMLDivElement): HTMLDivElement[][] {
@@ -49,5 +50,10 @@ export default class GameMap {
 
   get board() {
     return this.#board;
+  }
+
+  reset() {
+    this.#boardEl.innerHTML = "";
+    this.#board = this.create(this.#boardEl);
   }
 }
