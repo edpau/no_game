@@ -5,10 +5,12 @@ export default class Tank {
   #position: Pos;
   #fireDirection: TankFireDirection = "up";
   #board: HTMLDivElement[][];
+  #startingPosition: Pos;
 
   constructor(position: Pos, board: HTMLDivElement[][]) {
     this.#position = position;
     this.#board = board;
+    this.#startingPosition = position;
 
     this.#board[position.y][position.x].classList.add("tank");
   }
@@ -26,6 +28,14 @@ export default class Tank {
   }
 
   // TODO repeat code moveUp/ moveDown / moveLeft / moveRight make it simple?
+
+  draw(position: Pos) {
+    this.#board[position.y][position.x].classList.add("tank");
+  }
+
+  undraw(position: Pos) {
+    this.#board[position.y][position.x].classList.remove("tank");
+  }
 
   moveUp() {
     const { x, y } = this.#position;
@@ -87,5 +97,12 @@ export default class Tank {
     let { x, y } = this.#position;
     const bullet = new Bullet({ x, y: y }, this.#board);
     bullet.move(this.#fireDirection);
+  }
+
+  reset(board: HTMLDivElement[][]) {
+    this.undraw(this.#position);
+    this.#board= board;
+    this.#position = this.#startingPosition;
+    this.draw(this.#position);
   }
 }
