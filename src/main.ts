@@ -1,7 +1,6 @@
 import "./styles/main.scss";
 
 import Tank from "./components/Tank";
-
 import GameMap from "./game/GameMap";
 
 const boardEl = document.querySelector<HTMLDivElement>(".screen__board");
@@ -16,6 +15,8 @@ const btnFDDownEl = document.querySelector<HTMLButtonElement>("#fDDown");
 const btnFDLeftEl = document.querySelector<HTMLButtonElement>("#fDLeft");
 const btnFDRightEl = document.querySelector<HTMLButtonElement>("#fDRight");
 
+const btnResetEl = document.querySelector<HTMLButtonElement>("#reset");
+
 if (!boardEl) {
   throw new Error("Cannot find board element");
 }
@@ -29,13 +30,14 @@ if (
   !btnFDUpEl ||
   !btnFDDownEl ||
   !btnFDLeftEl ||
-  !btnFDRightEl
+  !btnFDRightEl ||
+  !btnResetEl
 ) {
   throw new Error("Cannot find controller elements");
 }
 
 // start game
-const gameMap= new GameMap(boardEl);
+let gameMap = new GameMap(boardEl);
 const tank = new Tank({ x: 5, y: 8 }, gameMap.board);
 
 // TODO game data, take away later
@@ -124,3 +126,13 @@ btnFDRightEl.addEventListener("click", () => {
   tank.fireDir = "right";
   directionDataEl.textContent = tank.fireDir;
 });
+
+// Event Listener - reset
+btnResetEl.addEventListener("click", () => {
+  resetGame();
+});
+
+function resetGame() {
+  gameMap.reset();
+  tank.reset(gameMap.board);
+}
