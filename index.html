@@ -23,6 +23,13 @@
       <div class="game-container">
         <div class="game">
           <div class="screen">
+            <div id="winModal" class="modal">
+              <div class="modal__content">
+                <h2 class="modal__heading">You Win</h2>
+                <p class="modal__para">Please press reset to play again.</p>
+                <button id="modalResetBtn" class="modal__button">Reset</button>
+              </div>
+            </div>
             <div class="screen__board board"></div>
           </div>
 
@@ -54,7 +61,9 @@
             <button id="fDRight" class="controller__btn controller__btn--right">
               right
             </button>
-            <button id="reset" class="controller__btn controller__btn--reset" >Reset</button>
+            <button id="reset" class="controller__btn controller__btn--reset">
+              Reset
+            </button>
           </div>
           <p>Direction</p>
           <p id="fireD"></p>
