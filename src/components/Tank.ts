@@ -42,7 +42,10 @@ export default class Tank {
 
     if (y - 1 < 0 || this.#board[y - 1][x].classList.contains("bullet")) return;
 
-    if (this.#board[y - 1][x].classList.contains("board__square--road")) {
+    if (
+      this.#board[y - 1][x].classList.contains("board__square--road") ||
+      this.#board[y - 1][x].classList.contains("board__square--flag")
+    ) {
       this.#board[y][x].classList.remove("tank");
       this.#board[y - 1][x].classList.add("tank");
       this.#position = { x: x, y: y - 1 };
@@ -58,7 +61,10 @@ export default class Tank {
     )
       return;
 
-    if (this.#board[y + 1][x].classList.contains("board__square--road")) {
+    if (
+      this.#board[y + 1][x].classList.contains("board__square--road") ||
+      this.#board[y + 1][x].classList.contains("board__square--flag")
+    ) {
       this.#board[y][x].classList.remove("tank");
       this.#board[y + 1][x].classList.add("tank");
       this.#position = { x: x, y: y + 1 };
@@ -70,7 +76,10 @@ export default class Tank {
 
     if (x - 1 < 0 || this.#board[y][x - 1].classList.contains("bullet")) return;
 
-    if (this.#board[y][x - 1].classList.contains("board__square--road")) {
+    if (
+      this.#board[y][x - 1].classList.contains("board__square--road") ||
+      this.#board[y][x - 1].classList.contains("board__square--flag")
+    ) {
       this.#board[y][x].classList.remove("tank");
       this.#board[y][x - 1].classList.add("tank");
       this.#position = { x: x - 1, y: y };
@@ -86,7 +95,10 @@ export default class Tank {
     )
       return;
 
-    if (this.#board[y][x + 1].classList.contains("board__square--road")) {
+    if (
+      this.#board[y][x + 1].classList.contains("board__square--road") ||
+      this.#board[y][x + 1].classList.contains("board__square--flag")
+    ) {
       this.#board[y][x].classList.remove("tank");
       this.#board[y][x + 1].classList.add("tank");
       this.#position = { x: x + 1, y: y };
