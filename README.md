@@ -152,6 +152,22 @@ I think as constant may be better.
 
 1. [x]I am not tracking the bullet state, so I need a time out to clear all the bullet in the game, and not let user to shoot the bullet when the state is restarting. (Later I found out I removed the gameMap and not holding the bullet state, I don't need to make a time out)
 
+### Make tank reach a flag and end the game
+- [x] add flag on the gameMap
+- [x] update bullet logic
+- [x] update tank move logic
+- [ ] once the tank reach the flag, open a modal and end game, player can reset game
+- [ ] disable controller event listener, when modal is up
+
+#### add flag on the gameMap
+- thinking ahead for future multiple level, more maps
+- [x] write a function to find the flag position (current one is efficient enough to handle a small to medium size map)
+- [x] give error message, if there is more than one flag, and there is no flag in the map, break the game, use try catch to provide error message
+
+#### update bullet logic
+- [x] when bullet hit the flag, it won't destroy the flag, it will disappear
+
+
 ## Game State
 
 1. board state
@@ -164,6 +180,8 @@ I think as constant may be better.
 // -------------------------------------------
 
 ## After MVP
+
+### create dialog for help and tell user key instruction and how to play the game  
 
 ### Refactor logic, make code easy to read
 
@@ -243,11 +261,11 @@ const squareClassNames: Record<number, string> = {
 
 When to use each?
 
-- ✅ Use an object when:
+- Use an object when:
   You have a static set of known keys, like tile types
   You want fast, clean access (squareClassNames[value])
   You're not dynamically adding/removing key-value pairs
-- ✅ Use a Map when:
+- Use a Map when:
   You need true key types (e.g. objects, references, symbols)
   You’re going to add/remove entries dynamically
   You're dealing with lots of lookups and want guaranteed key type integrity
@@ -315,6 +333,39 @@ const squareClassNames: Record<number, string> = {
 };
 ```
 
+### Error handling during class construction (with UI fallback)
+Problem:
+I want my game to fail early when the GameMap is missing a flag.
+I want to show a visible error in the UI and also log it to the console, without crashing silently or leaving a blank screen.
+
+``` js
+// This will throw and break everything:
+this.#flag = this.flagPos(gameMap); // throws if invalid
+this.#board = this.create(...); // never runs
+``` 
+Solution:
+Wrap the risky logic in a try/catch inside the constructor:
+``` js
+try {
+  this.#flag = this.flagPos(gameMap);
+} catch (error) {
+  // Dev only message 
+  console.error("Map initialization failed:", error);
+
+  const errorMsg = document.createElement("div");
+  errorMsg.textContent = (error as Error).message;
+  errorMsg.style.color = "red";
+  boardEl.appendChild(errorMsg);
+
+  throw error; // the game still crash after showing the reason
+}
+```
+When to use this?
+Use this pattern if:
+You want to catch errors early 
+You want to see clear messages when level data is wrong
+
+
 ### re-render
 
 When re-render whole map happen?
@@ -364,6 +415,9 @@ for (const [key, el] of Object.entries(controllerEls)) {
 - [ ] fix tank class, change shooting direction
 - [ ] fix squareClassNames type, change it to type not use Record, change to as constant
 
+- [ ] write readMe with a short intro to the project.
+- [ ]move plan into a different file and link to the project
+
 ## Log
 
 4/8
@@ -379,9 +433,10 @@ for (const [key, el] of Object.entries(controllerEls)) {
 - [x] refactor: extract gameMap data and board rendering logic to GameMap.ts
 - [x] Restart state, 
 - [ ] make Flag and end game
-- [ ] update error handle in element in ts
+- [ ] update error handle in element in ts, change it to try catch? 
 
 # TODO today
+- [ ] prevent player press keypad when the end game
 
 ## Quick idea
 
