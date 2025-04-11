@@ -2,6 +2,7 @@ import "./styles/main.scss";
 
 import Tank from "./components/Tank";
 import GameMap from "./game/GameMap";
+import { Pos } from "./game/types";
 
 const boardEl = document.querySelector<HTMLDivElement>(".screen__board");
 const btnUpEl = document.querySelector<HTMLButtonElement>("#dUp");
@@ -16,9 +17,17 @@ const btnFDLeftEl = document.querySelector<HTMLButtonElement>("#fDLeft");
 const btnFDRightEl = document.querySelector<HTMLButtonElement>("#fDRight");
 
 const btnResetEl = document.querySelector<HTMLButtonElement>("#reset");
+const btnModalResetEl =
+  document.querySelector<HTMLButtonElement>("#modalResetBtn");
+
+const winModalEl = document.querySelector<HTMLDivElement>("#winModal");
 
 if (!boardEl) {
   throw new Error("Cannot find board element");
+}
+
+if (!winModalEl) {
+  throw new Error("Cannot find win modal element");
 }
 
 if (
@@ -31,7 +40,8 @@ if (
   !btnFDDownEl ||
   !btnFDLeftEl ||
   !btnFDRightEl ||
-  !btnResetEl
+  !btnResetEl ||
+  !btnModalResetEl
 ) {
   throw new Error("Cannot find controller elements");
 }
@@ -39,6 +49,7 @@ if (
 // start game
 let gameMap = new GameMap(boardEl);
 const tank = new Tank({ x: 5, y: 8 }, gameMap.board);
+const flag: Pos = gameMap.flag;
 
 // TODO game data, take away later
 const directionDataEl = document.querySelector("#fireD");
@@ -46,40 +57,50 @@ if (!directionDataEl) {
   throw new Error("game data element not found");
 }
 
+// TODO refactor, repeat code
 // Event Listener - direction btn
 btnUpEl.addEventListener("click", () => {
   tank.moveUp();
+  handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnDownEl.addEventListener("click", () => {
   tank.moveDown();
+  handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnLeftEl.addEventListener("click", () => {
   tank.moveLeft();
+  handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnRightEl.addEventListener("click", () => {
   tank.moveRight();
+  handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnFireEl.addEventListener("click", () => {
   tank.fireBullet();
 });
 
+// TODO refactor, repeat code
 window.addEventListener("keydown", (event: KeyboardEvent) => {
   switch (event.code) {
     case "KeyW":
       tank.moveUp();
+      handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyS":
       tank.moveDown();
+      handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyA":
       tank.moveLeft();
+      handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyD":
       tank.moveRight();
+      handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyF":
       tank.fireBullet();
@@ -130,9 +151,36 @@ btnFDRightEl.addEventListener("click", () => {
 // Event Listener - reset
 btnResetEl.addEventListener("click", () => {
   resetGame();
+  hideModal(winModalEl);
+});
+
+// Event Listener - modal reset
+btnModalResetEl.addEventListener("click", () => {
+  resetGame();
+  hideModal(winModalEl);
 });
 
 function resetGame() {
   gameMap.reset();
   tank.reset(gameMap.board);
 }
+
+function handleFlagCapture(
+  flag: Pos,
+  tankCurrentPos: Pos,
+  winModalEl: HTMLDivElement
+) {
+  if (flag.x === tankCurrentPos.x && flag.y === tankCurrentPos.y) {
+    console.log("s");
+    showModal(winModalEl);
+  }
+}
+
+function showModal(modal: HTMLDivElement) {
+  modal.style.display = "block";
+}
+
+function hideModal(modal: HTMLDivElement) {
+  modal.style.display = "none";
+}
+
