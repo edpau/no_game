@@ -46,10 +46,23 @@ if (
   throw new Error("Cannot find controller elements");
 }
 
+const controlButtons: HTMLButtonElement[] = [
+  btnUpEl,
+  btnDownEl,
+  btnLeftEl,
+  btnRightEl,
+  btnFDUpEl,
+  btnFDDownEl,
+  btnFDLeftEl,
+  btnFDRightEl,
+  btnFireEl,
+];
+
 // start game
 let gameMap = new GameMap(boardEl);
 const tank = new Tank({ x: 5, y: 8 }, gameMap.board);
 const flag: Pos = gameMap.flag;
+let gameActive: Boolean = true;
 
 // TODO game data, take away later
 const directionDataEl = document.querySelector("#fireD");
@@ -60,26 +73,31 @@ if (!directionDataEl) {
 // TODO refactor, repeat code
 // Event Listener - direction btn
 btnUpEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.moveUp();
   handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnDownEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.moveDown();
   handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnLeftEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.moveLeft();
   handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnRightEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.moveRight();
   handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnFireEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.fireBullet();
 });
 
@@ -87,39 +105,48 @@ btnFireEl.addEventListener("click", () => {
 window.addEventListener("keydown", (event: KeyboardEvent) => {
   switch (event.code) {
     case "KeyW":
+      if (!gameActive) return;
       tank.moveUp();
       handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyS":
+      if (!gameActive) return;
       tank.moveDown();
       handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyA":
+      if (!gameActive) return;
       tank.moveLeft();
       handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyD":
+      if (!gameActive) return;
       tank.moveRight();
       handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyF":
+      if (!gameActive) return;
       tank.fireBullet();
       break;
 
     // TODO need to make a function to make it simple and it need to be reuse for other tank
     case "KeyI":
+      if (!gameActive) return;
       tank.fireDir = "up";
       directionDataEl.textContent = tank.fireDir;
       break;
     case "KeyK":
+      if (!gameActive) return;
       tank.fireDir = "down";
       directionDataEl.textContent = tank.fireDir;
       break;
     case "KeyJ":
+      if (!gameActive) return;
       tank.fireDir = "left";
       directionDataEl.textContent = tank.fireDir;
       break;
     case "KeyL":
+      if (!gameActive) return;
       tank.fireDir = "right";
       directionDataEl.textContent = tank.fireDir;
       break;
@@ -129,21 +156,25 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
 // Event Listener - fire direction
 // TODO need to make a function to make it simple and it need to be reuse for other tank
 btnFDUpEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.fireDir = "up";
   directionDataEl.textContent = tank.fireDir;
 });
 
 btnFDDownEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.fireDir = "down";
   directionDataEl.textContent = tank.fireDir;
 });
 
 btnFDLeftEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.fireDir = "left";
   directionDataEl.textContent = tank.fireDir;
 });
 
 btnFDRightEl.addEventListener("click", () => {
+  if (!gameActive) return;
   tank.fireDir = "right";
   directionDataEl.textContent = tank.fireDir;
 });
@@ -160,27 +191,41 @@ btnModalResetEl.addEventListener("click", () => {
   hideModal(winModalEl);
 });
 
-function resetGame() {
+// Game state helpers
+
+function resetGame(): void {
   gameMap.reset();
   tank.reset(gameMap.board);
+  gameActive = true;
+  enableControls();
 }
 
 function handleFlagCapture(
   flag: Pos,
   tankCurrentPos: Pos,
   winModalEl: HTMLDivElement
-) {
+): void {
   if (flag.x === tankCurrentPos.x && flag.y === tankCurrentPos.y) {
-    console.log("s");
     showModal(winModalEl);
+    gameActive = false;
+    disableControls();
   }
 }
 
-function showModal(modal: HTMLDivElement) {
+// UI control helpers
+
+function showModal(modal: HTMLDivElement): void {
   modal.style.display = "block";
 }
 
-function hideModal(modal: HTMLDivElement) {
+function hideModal(modal: HTMLDivElement): void {
   modal.style.display = "none";
 }
 
+function disableControls(): void {
+  controlButtons.forEach((btn) => (btn.disabled = true));
+}
+
+function enableControls(): void {
+  controlButtons.forEach((btn) => (btn.disabled = false));
+}
