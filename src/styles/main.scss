@@ -2,7 +2,20 @@
 @use "./base";
 @use "./accessibility";
 @use "./media";
+@use "./modal-screen";
 @use "./variables" as vars;
+
+.game {
+	padding: 80px;
+}
+
+.screen {
+	display: relative;
+	width: 400px;
+	height: 400px;
+}
+
+
 
 // gameMap board
 
@@ -24,6 +37,9 @@
     }
     &--wall {
       background-color: brown;
+    }
+    &--flag{
+      background-color: chocolate;
     }
     &--error {
       background-color: red;
