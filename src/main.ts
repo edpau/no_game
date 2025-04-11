@@ -64,12 +64,6 @@ const tank = new Tank({ x: 5, y: 8 }, gameMap.board);
 const flag: Pos = gameMap.flag;
 let gameActive: Boolean = true;
 
-// TODO game data, take away later
-const directionDataEl = document.querySelector("#fireD");
-if (!directionDataEl) {
-  throw new Error("game data element not found");
-}
-
 // TODO refactor, repeat code
 // Event Listener - direction btn
 btnUpEl.addEventListener("click", () => {
@@ -133,22 +127,18 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
     case "KeyI":
       if (!gameActive) return;
       tank.fireDir = "up";
-      directionDataEl.textContent = tank.fireDir;
       break;
     case "KeyK":
       if (!gameActive) return;
       tank.fireDir = "down";
-      directionDataEl.textContent = tank.fireDir;
       break;
     case "KeyJ":
       if (!gameActive) return;
       tank.fireDir = "left";
-      directionDataEl.textContent = tank.fireDir;
       break;
     case "KeyL":
       if (!gameActive) return;
       tank.fireDir = "right";
-      directionDataEl.textContent = tank.fireDir;
       break;
   }
 });
@@ -158,25 +148,21 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
 btnFDUpEl.addEventListener("click", () => {
   if (!gameActive) return;
   tank.fireDir = "up";
-  directionDataEl.textContent = tank.fireDir;
 });
 
 btnFDDownEl.addEventListener("click", () => {
   if (!gameActive) return;
   tank.fireDir = "down";
-  directionDataEl.textContent = tank.fireDir;
 });
 
 btnFDLeftEl.addEventListener("click", () => {
   if (!gameActive) return;
   tank.fireDir = "left";
-  directionDataEl.textContent = tank.fireDir;
 });
 
 btnFDRightEl.addEventListener("click", () => {
   if (!gameActive) return;
   tank.fireDir = "right";
-  directionDataEl.textContent = tank.fireDir;
 });
 
 // Event Listener - reset
