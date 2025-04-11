@@ -12,8 +12,7 @@ export default class Bullet {
     this.#board[this.pos.y][this.pos.x].classList.add("bullet");
   }
 
-
-// TODO refactor, too many repeat code
+  // TODO refactor, too many repeat code
   async move(tankFireDirection: TankFireDirection) {
     if (tankFireDirection === "up") {
       if (this.#pos.y - 1 < 0) {
@@ -45,6 +44,9 @@ export default class Bullet {
       } else if (
         this.#board[this.#pos.y - 1][this.#pos.x].classList.contains(
           "board__square--boundary"
+        ) ||
+        this.#board[this.#pos.y - 1][this.#pos.x].classList.contains(
+          "board__square--flag"
         )
       ) {
         await delay(this.#DELAY);
@@ -80,6 +82,9 @@ export default class Bullet {
       } else if (
         this.#board[this.#pos.y + 1][this.#pos.x].classList.contains(
           "board__square--boundary"
+        ) ||
+        this.#board[this.#pos.y + 1][this.#pos.x].classList.contains(
+          "board__square--flag"
         )
       ) {
         await delay(this.#DELAY);
@@ -115,6 +120,9 @@ export default class Bullet {
       } else if (
         this.#board[this.#pos.y][this.#pos.x - 1].classList.contains(
           "board__square--boundary"
+        ) ||
+        this.#board[this.#pos.y][this.#pos.x - 1].classList.contains(
+          "board__square--flag"
         )
       ) {
         await delay(this.#DELAY);
@@ -150,6 +158,9 @@ export default class Bullet {
       } else if (
         this.#board[this.#pos.y][this.#pos.x + 1].classList.contains(
           "board__square--boundary"
+        ) ||
+        this.#board[this.#pos.y][this.#pos.x + 1].classList.contains(
+          "board__square--flag"
         )
       ) {
         await delay(this.#DELAY);
