@@ -43,7 +43,11 @@ if (
   !btnResetEl ||
   !btnModalResetEl
 ) {
-  throw new Error("Cannot find controller elements");
+  throw new Error(
+    `Cannot find controller elements: btnUpEl => ${btnUpEl}, btnDownEl => ${btnDownEl}, btnLeftEl => ${btnLeftEl}, btnRightEl => ${btnRightEl}, 
+    btnFireEl => ${btnFireEl}, btnFDUpEl => ${btnFDUpEl}, btnFDDownEl => ${btnFDDownEl}, btnFDLeftEl => ${btnFDLeftEl}, btnFDRightEl => ${btnFDRightEl}, 
+    btnResetEl => ${btnResetEl}, btnModalResetEl => ${btnModalResetEl} `
+  );
 }
 
 const controlButtons: HTMLButtonElement[] = [
