@@ -438,12 +438,14 @@ for (const [key, el] of Object.entries(controllerEls)) {
 
 - [x] refactor: extract gameMap data and board rendering logic to GameMap.ts
 - [x] Restart state,
-- [ ] make Flag and end game
-- [ ] update error handle in element in ts, change it to try catch?
+- [x] make Flag and end game
+- [x] update error handle in element in ts, change it to try catch?
+
+
 
 # TODO today
 
-- [ ] prevent player press keypad when the end game
+
 
 ## Quick idea
 
