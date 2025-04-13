@@ -9,6 +9,7 @@ https://edpau.github.io/no_game/
 ## Practice
 
 - Git branch when make new features
+- Practice clamp for responsive
 
 ## Check no memory leak in Task Manager
 
@@ -448,3 +449,8 @@ for (const [key, el] of Object.entries(controllerEls)) {
 
 - use enum for direction?
 - update error handle for element
+
+
+
+## CSS
+- reset button, add reset button inside the button 
