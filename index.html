@@ -22,7 +22,7 @@
     <main>
       <div class="game-container">
         <div class="game">
-          <div class="screen">
+          <div class="game__screen screen">
             <div id="winModal" class="modal">
               <div class="modal__content">
                 <h2 class="modal__heading">You Win</h2>
@@ -34,36 +34,49 @@
           </div>
 
           <div class="game__controller controller">
-            <button id="dUp" class="controller__btn controller__btn--up">
-              up
-            </button>
-            <button id="dDown" class="controller__btn controller__btn--down">
-              down
-            </button>
-            <button id="dLeft" class="controller__btn controller__btn--left">
-              left
-            </button>
-            <button id="dRight" class="controller__btn controller__btn--right">
-              right
-            </button>
-            <button id="fire" class="controller__btn controller__btn--fire">
-              fire
-            </button>
-            <button id="fDUp" class="controller__btn controller__btn--up">
-              up
-            </button>
-            <button id="fDDown" class="controller__btn controller__btn--down">
-              down
-            </button>
-            <button id="fDLeft" class="controller__btn controller__btn--left">
-              left
-            </button>
-            <button id="fDRight" class="controller__btn controller__btn--right">
-              right
-            </button>
-            <button id="reset" class="controller__btn controller__btn--reset">
-              Reset
-            </button>
+            <p class="controller__label controller__label--move">Move Pad</p>
+            <p class="controller__label controller__label--fire">Fire Pad</p>
+            <p class="controller__label controller__label--reset">Reset</p>
+            <button
+              id="dUp"
+              class="controller__btn controller__btn--dUp"
+            ></button>
+            <button
+              id="dDown"
+              class="controller__btn controller__btn--dDown"
+            ></button>
+            <button
+              id="dLeft"
+              class="controller__btn controller__btn--dLeft"
+            ></button>
+            <button
+              id="dRight"
+              class="controller__btn controller__btn--dRight"
+            ></button>
+            <button
+              id="fire"
+              class="controller__btn controller__btn--fire"
+            ></button>
+            <button
+              id="fDUp"
+              class="controller__btn controller__btn--fDUp"
+            ></button>
+            <button
+              id="fDDown"
+              class="controller__btn controller__btn--fDDown"
+            ></button>
+            <button
+              id="fDLeft"
+              class="controller__btn controller__btn--fDLeft"
+            ></button>
+            <button
+              id="fDRight"
+              class="controller__btn controller__btn--fDRight"
+            ></button>
+            <button
+              id="reset"
+              class="controller__btn controller__btn--reset"
+            ></button>
           </div>
         </div>
       </div>

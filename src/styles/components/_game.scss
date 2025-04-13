@@ -1,0 +1,20 @@
+.game {
+    margin: 0 auto;
+    border: 1px solid black;
+  
+    &__screen {
+      margin: 0 auto;
+      position: relative;
+      width: 80%;
+      aspect-ratio: 1/1;
+      border: 5px solid red;
+    }
+  
+    &__controller {
+      border: 5px solid green;
+      margin: 0 auto;
+      width: 80%;
+      aspect-ratio: 1/1;
+    }
+  }
+  

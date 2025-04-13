@@ -201,7 +201,7 @@ function handleFlagCapture(
 // UI control helpers
 
 function showModal(modal: HTMLDivElement): void {
-  modal.style.display = "block";
+  modal.style.display = "flex";
 }
 
 function hideModal(modal: HTMLDivElement): void {

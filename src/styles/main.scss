@@ -2,55 +2,25 @@
 @use "./base";
 @use "./accessibility";
 @use "./media";
-@use "./modal-screen";
 @use "./variables" as vars;
 
-.game {
-	padding: 80px;
+
+@use "./components/game";
+@use "./components/modal-screen";
+@use "./components/board";
+@use "./components/bullet";
+@use "./components/tank";
+@use "./components/controller";
+
+main{
+width: 100%;
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
-.screen {
-	display: relative;
-	width: 400px;
-	height: 400px;
-}
-
-
-
-// gameMap board
-
-.board {
-  &__row {
-    display: flex;
-  }
-
-  &__square {
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-
-    &--road {
-      background-color: aqua;
-    }
-    &--boundary {
-      background-color: grey;
-    }
-    &--wall {
-      background-color: brown;
-    }
-    &--flag{
-      background-color: chocolate;
-    }
-    &--error {
-      background-color: red;
-    }
-  }
-}
-
-.bullet {
-    background-color: pink;
-}
-
-.tank {
-  background-color: green;
+.game-container {
+  width: 90%;
+  max-width: 450px;
 }
