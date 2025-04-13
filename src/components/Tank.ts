@@ -1,9 +1,16 @@
 import type { Pos, TankFireDirection } from "../game/types";
 import Bullet from "./Bullets";
 
+const tankDirectionClasses = {
+  up: "tank--up",
+  down: "tank--down",
+  left: "tank--left",
+  right: "tank--right",
+} as const;
+
 export default class Tank {
   #position: Pos;
-  #fireDirection: TankFireDirection = "up";
+  #fireDirection: TankFireDirection;
   #board: HTMLDivElement[][];
   #startingPosition: Pos;
 
@@ -11,30 +18,35 @@ export default class Tank {
     this.#position = position;
     this.#board = board;
     this.#startingPosition = position;
+    this.#fireDirection = "up";
 
     this.#board[position.y][position.x].classList.add("tank");
+  }
+
+  updateFireDirection(fireDirection: TankFireDirection) {
+    this.undraw(this.position);
+    this.#fireDirection = fireDirection;
+    this.draw(this.position);
   }
 
   get position() {
     return this.#position;
   }
 
-  get fireDir() {
-    return this.#fireDirection;
-  }
-
-  set fireDir(fireDir: TankFireDirection) {
-    this.#fireDirection = fireDir;
-  }
-
   // TODO repeat code moveUp/ moveDown / moveLeft / moveRight make it simple?
 
   draw(position: Pos) {
-    this.#board[position.y][position.x].classList.add("tank");
+    this.#board[position.y][position.x].classList.add(
+      "tank",
+      tankDirectionClasses[this.#fireDirection]
+    );
   }
 
   undraw(position: Pos) {
-    this.#board[position.y][position.x].classList.remove("tank");
+    this.#board[position.y][position.x].classList.remove(
+      "tank",
+      tankDirectionClasses[this.#fireDirection]
+    );
   }
 
   moveUp() {
@@ -46,8 +58,9 @@ export default class Tank {
       this.#board[y - 1][x].classList.contains("board__square--road") ||
       this.#board[y - 1][x].classList.contains("board__square--flag")
     ) {
-      this.#board[y][x].classList.remove("tank");
-      this.#board[y - 1][x].classList.add("tank");
+      this.undraw({ x, y });
+      this.draw({ x, y: y - 1 });
+
       this.#position = { x: x, y: y - 1 };
     }
   }
@@ -65,8 +78,8 @@ export default class Tank {
       this.#board[y + 1][x].classList.contains("board__square--road") ||
       this.#board[y + 1][x].classList.contains("board__square--flag")
     ) {
-      this.#board[y][x].classList.remove("tank");
-      this.#board[y + 1][x].classList.add("tank");
+      this.undraw({ x, y });
+      this.draw({ x, y: y + 1 });
       this.#position = { x: x, y: y + 1 };
     }
   }
@@ -80,8 +93,9 @@ export default class Tank {
       this.#board[y][x - 1].classList.contains("board__square--road") ||
       this.#board[y][x - 1].classList.contains("board__square--flag")
     ) {
-      this.#board[y][x].classList.remove("tank");
-      this.#board[y][x - 1].classList.add("tank");
+      this.undraw({ x, y });
+      this.draw({ x: x - 1, y });
+
       this.#position = { x: x - 1, y: y };
     }
   }
@@ -99,8 +113,8 @@ export default class Tank {
       this.#board[y][x + 1].classList.contains("board__square--road") ||
       this.#board[y][x + 1].classList.contains("board__square--flag")
     ) {
-      this.#board[y][x].classList.remove("tank");
-      this.#board[y][x + 1].classList.add("tank");
+      this.undraw({ x, y });
+      this.draw({ x: x + 1, y });
       this.#position = { x: x + 1, y: y };
     }
   }
