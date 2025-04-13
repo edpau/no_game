@@ -372,6 +372,22 @@ Use this pattern if:
 You want to catch errors early
 You want to see clear messages when level data is wrong
 
+### Prevent double-tap zoom on iOS with touch-action in ios
+```css
+button, a {
+  touch-action: manipulation;
+}
+```
+
+### Prevent text selection in game-container in ios
+```css
+.game-container {
+  width: 90%;
+  max-width: 450px;
+  user-select: none;
+}
+```
+
 ### re-render
 
 When re-render whole map happen?
