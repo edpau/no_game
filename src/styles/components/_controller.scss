@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(14, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  touch-action: manipulation;
+  
 
   &__label {
     display: none;
