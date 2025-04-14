@@ -1,4 +1,5 @@
-import type { Pos, TankFireDirection } from "../game/types";
+import type { Pos } from "../game/types";
+import { Direction } from "../game/types";
 import Bullet from "./Bullets";
 
 const tankDirectionClasses = {
@@ -10,7 +11,7 @@ const tankDirectionClasses = {
 
 export default class Tank {
   #position: Pos;
-  #fireDirection: TankFireDirection;
+  #fireDirection: Direction;
   #board: HTMLDivElement[][];
   #startingPosition: Pos;
 
@@ -18,12 +19,12 @@ export default class Tank {
     this.#position = position;
     this.#board = board;
     this.#startingPosition = position;
-    this.#fireDirection = "up";
+    this.#fireDirection = Direction.UP;
 
     this.#board[position.y][position.x].classList.add("tank");
   }
 
-  updateFireDirection(fireDirection: TankFireDirection) {
+  updateFireDirection(fireDirection: Direction) {
     this.undraw(this.position);
     this.#fireDirection = fireDirection;
     this.draw(this.position);
@@ -129,7 +130,7 @@ export default class Tank {
     this.undraw(this.#position);
     this.#board = board;
     this.#position = this.#startingPosition;
-    this.#fireDirection = "up";
+    this.#fireDirection = Direction.UP;
     this.draw(this.#position);
   }
 }
