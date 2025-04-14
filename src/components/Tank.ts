@@ -24,99 +24,49 @@ export default class Tank {
     this.#board[position.y][position.x].classList.add("tank");
   }
 
-  updateFireDirection(fireDirection: Direction) {
-    this.undraw(this.position);
-    this.#fireDirection = fireDirection;
-    this.draw(this.position);
-  }
-
   get position() {
     return this.#position;
   }
 
-  // TODO repeat code moveUp/ moveDown / moveLeft / moveRight make it simple?
-
-  draw(position: Pos) {
-    this.#board[position.y][position.x].classList.add(
-      "tank",
-      tankDirectionClasses[this.#fireDirection]
-    );
+  updateFireDirection(fireDirection: Direction) {
+    this.undraw(this.#position);
+    this.#fireDirection = fireDirection;
+    this.draw(this.#position);
   }
 
-  undraw(position: Pos) {
-    this.#board[position.y][position.x].classList.remove(
-      "tank",
-      tankDirectionClasses[this.#fireDirection]
-    );
-  }
+  move(direction: Direction) {
+    const directions = {
+      up: { dX: 0, dY: -1 },
+      down: { dX: 0, dY: 1 },
+      left: { dX: -1, dY: 0 },
+      right: { dX: +1, dY: 0 },
+    };
 
-  moveUp() {
-    const { x, y } = this.#position;
+    const offset = directions[direction];
+    if (!offset) return;
 
-    if (y - 1 < 0 || this.#board[y - 1][x].classList.contains("bullet")) return;
+    const newX = this.#position.x + offset.dX;
+    const newY = this.#position.y + offset.dY;
+
+    const newPosition: Pos = { x: newX, y: newY };
+
+    const isOutOfBounds =
+      newX < 0 ||
+      newY < 0 ||
+      newX >= this.#board[0].length ||
+      newY >= this.#board.length;
+
+    if (isOutOfBounds) return;
+    const nextSquare: HTMLDivElement = this.#board[newY][newX];
+    if (this.nextSquareHasClass(nextSquare, "bullet")) return;
 
     if (
-      this.#board[y - 1][x].classList.contains("board__square--road") ||
-      this.#board[y - 1][x].classList.contains("board__square--flag")
+      this.nextSquareHasClass(nextSquare, "board__square--road") ||
+      this.nextSquareHasClass(nextSquare, "board__square--flag")
     ) {
-      this.undraw({ x, y });
-      this.draw({ x, y: y - 1 });
-
-      this.#position = { x: x, y: y - 1 };
-    }
-  }
-
-  moveDown() {
-    const { x, y } = this.#position;
-
-    if (
-      y + 1 >= this.#board.length ||
-      this.#board[y + 1][x].classList.contains("bullet")
-    )
-      return;
-
-    if (
-      this.#board[y + 1][x].classList.contains("board__square--road") ||
-      this.#board[y + 1][x].classList.contains("board__square--flag")
-    ) {
-      this.undraw({ x, y });
-      this.draw({ x, y: y + 1 });
-      this.#position = { x: x, y: y + 1 };
-    }
-  }
-
-  moveLeft() {
-    const { x, y } = this.#position;
-
-    if (x - 1 < 0 || this.#board[y][x - 1].classList.contains("bullet")) return;
-
-    if (
-      this.#board[y][x - 1].classList.contains("board__square--road") ||
-      this.#board[y][x - 1].classList.contains("board__square--flag")
-    ) {
-      this.undraw({ x, y });
-      this.draw({ x: x - 1, y });
-
-      this.#position = { x: x - 1, y: y };
-    }
-  }
-
-  moveRight() {
-    const { x, y } = this.#position;
-
-    if (
-      x + 1 >= this.#board[0].length ||
-      this.#board[y][x + 1].classList.contains("bullet")
-    )
-      return;
-
-    if (
-      this.#board[y][x + 1].classList.contains("board__square--road") ||
-      this.#board[y][x + 1].classList.contains("board__square--flag")
-    ) {
-      this.undraw({ x, y });
-      this.draw({ x: x + 1, y });
-      this.#position = { x: x + 1, y: y };
+      this.undraw(this.#position);
+      this.draw(newPosition);
+      this.#position = newPosition;
     }
   }
 
@@ -132,5 +82,26 @@ export default class Tank {
     this.#position = this.#startingPosition;
     this.#fireDirection = Direction.UP;
     this.draw(this.#position);
+  }
+
+  private nextSquareHasClass(
+    nextSquare: HTMLDivElement,
+    className: string
+  ): boolean {
+    return nextSquare.classList.contains(className);
+  }
+
+  private draw(position: Pos) {
+    this.#board[position.y][position.x].classList.add(
+      "tank",
+      tankDirectionClasses[this.#fireDirection]
+    );
+  }
+
+  private undraw(position: Pos) {
+    this.#board[position.y][position.x].classList.remove(
+      "tank",
+      tankDirectionClasses[this.#fireDirection]
+    );
   }
 }

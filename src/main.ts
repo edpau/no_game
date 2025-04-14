@@ -4,6 +4,8 @@ import Tank from "./components/Tank";
 import GameMap from "./game/GameMap";
 import { Pos } from "./game/types";
 
+import { Direction } from "./game/types";
+
 const boardEl = document.querySelector<HTMLDivElement>(".screen__board");
 const btnUpEl = document.querySelector<HTMLButtonElement>("#dUp");
 const btnDownEl = document.querySelector<HTMLButtonElement>("#dDown");
@@ -72,25 +74,25 @@ let gameActive: Boolean = true;
 // Event Listener - direction btn
 btnUpEl.addEventListener("click", () => {
   if (!gameActive) return;
-  tank.moveUp();
+  tank.move(Direction.UP);
   handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnDownEl.addEventListener("click", () => {
   if (!gameActive) return;
-  tank.moveDown();
+  tank.move(Direction.DOWN);
   handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnLeftEl.addEventListener("click", () => {
   if (!gameActive) return;
-  tank.moveLeft();
+  tank.move(Direction.LEFT);
   handleFlagCapture(flag, tank.position, winModalEl);
 });
 
 btnRightEl.addEventListener("click", () => {
   if (!gameActive) return;
-  tank.moveRight();
+  tank.move(Direction.RIGHT);
   handleFlagCapture(flag, tank.position, winModalEl);
 });
 
@@ -104,22 +106,22 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
   switch (event.code) {
     case "KeyW":
       if (!gameActive) return;
-      tank.moveUp();
+      tank.move(Direction.UP);
       handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyS":
       if (!gameActive) return;
-      tank.moveDown();
+      tank.move(Direction.DOWN);
       handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyA":
       if (!gameActive) return;
-      tank.moveLeft();
+      tank.move(Direction.LEFT);
       handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyD":
       if (!gameActive) return;
-      tank.moveRight();
+      tank.move(Direction.RIGHT);
       handleFlagCapture(flag, tank.position, winModalEl);
       break;
     case "KeyF":
@@ -130,19 +132,19 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
     // TODO need to make a function to make it simple and it need to be reuse for other tank
     case "KeyI":
       if (!gameActive) return;
-      tank.updateFireDirection("up");
+      tank.updateFireDirection(Direction.UP);
       break;
     case "KeyK":
       if (!gameActive) return;
-      tank.updateFireDirection("down");
+      tank.updateFireDirection(Direction.DOWN);
       break;
     case "KeyJ":
       if (!gameActive) return;
-      tank.updateFireDirection("left");
+      tank.updateFireDirection(Direction.LEFT);
       break;
     case "KeyL":
       if (!gameActive) return;
-      tank.updateFireDirection("right");
+      tank.updateFireDirection(Direction.RIGHT);
       break;
   }
 });
@@ -151,22 +153,22 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
 // TODO need to make a function to make it simple and it need to be reuse for other tank
 btnFDUpEl.addEventListener("click", () => {
   if (!gameActive) return;
-  tank.updateFireDirection("up");
+  tank.updateFireDirection(Direction.UP);
 });
 
 btnFDDownEl.addEventListener("click", () => {
   if (!gameActive) return;
-  tank.updateFireDirection("down");
+  tank.updateFireDirection(Direction.DOWN);
 });
 
 btnFDLeftEl.addEventListener("click", () => {
   if (!gameActive) return;
-  tank.updateFireDirection("left");
+  tank.updateFireDirection(Direction.LEFT);
 });
 
 btnFDRightEl.addEventListener("click", () => {
   if (!gameActive) return;
-  tank.updateFireDirection("right");
+  tank.updateFireDirection(Direction.RIGHT);
 });
 
 // Event Listener - reset
