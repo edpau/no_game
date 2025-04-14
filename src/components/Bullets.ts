@@ -44,7 +44,6 @@ export default class Bullet {
       await this.moveBullet(newX, newY, tankFireDirection);
     } else if (this.nextSquareHasClass(nextSquare, "board__square--wall")) {
       await this.unDrawBullet();
-      console.log("wall");
       this.#board[newY][newX].classList.remove("board__square--wall");
       this.#board[newY][newX].classList.add("board__square--road");
     } else if (
