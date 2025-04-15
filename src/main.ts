@@ -11,6 +11,7 @@ import {
   hideModal,
   showModal,
 } from "./utility/ui";
+import { handleFlagCapture, resetGame } from "./game/state";
 
 const boardEl = document.querySelector<HTMLDivElement>(".screen__board");
 const btnUpEl = document.querySelector<HTMLButtonElement>("#dUp");
@@ -74,32 +75,56 @@ const controlButtons: HTMLButtonElement[] = [
 let gameMap = new GameMap(boardEl);
 const tank = new Tank({ x: 5, y: 8 }, gameMap.board);
 const flag: Pos = gameMap.flag;
-let gameActive: Boolean = true;
+let gameActive: boolean = true;
 
 // TODO refactor, repeat code
 // Event Listener - direction btn
 btnUpEl.addEventListener("click", () => {
   if (!gameActive) return;
   tank.move(Direction.UP);
-  handleFlagCapture(flag, tank.position, winModalEl);
+  handleFlagCapture(
+    flag,
+    tank.position,
+    winModalEl,
+    gameActive,
+    controlButtons
+  );
 });
 
 btnDownEl.addEventListener("click", () => {
   if (!gameActive) return;
   tank.move(Direction.DOWN);
-  handleFlagCapture(flag, tank.position, winModalEl);
+  handleFlagCapture(
+    flag,
+    tank.position,
+    winModalEl,
+    gameActive,
+    controlButtons
+  );
 });
 
 btnLeftEl.addEventListener("click", () => {
   if (!gameActive) return;
   tank.move(Direction.LEFT);
-  handleFlagCapture(flag, tank.position, winModalEl);
+  handleFlagCapture(
+    flag,
+    tank.position,
+    winModalEl,
+    gameActive,
+    controlButtons
+  );
 });
 
 btnRightEl.addEventListener("click", () => {
   if (!gameActive) return;
   tank.move(Direction.RIGHT);
-  handleFlagCapture(flag, tank.position, winModalEl);
+  handleFlagCapture(
+    flag,
+    tank.position,
+    winModalEl,
+    gameActive,
+    controlButtons
+  );
 });
 
 btnFireEl.addEventListener("click", () => {
@@ -113,22 +138,46 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
     case "KeyW":
       if (!gameActive) return;
       tank.move(Direction.UP);
-      handleFlagCapture(flag, tank.position, winModalEl);
+      handleFlagCapture(
+        flag,
+        tank.position,
+        winModalEl,
+        gameActive,
+        controlButtons
+      );
       break;
     case "KeyS":
       if (!gameActive) return;
       tank.move(Direction.DOWN);
-      handleFlagCapture(flag, tank.position, winModalEl);
+      handleFlagCapture(
+        flag,
+        tank.position,
+        winModalEl,
+        gameActive,
+        controlButtons
+      );
       break;
     case "KeyA":
       if (!gameActive) return;
       tank.move(Direction.LEFT);
-      handleFlagCapture(flag, tank.position, winModalEl);
+      handleFlagCapture(
+        flag,
+        tank.position,
+        winModalEl,
+        gameActive,
+        controlButtons
+      );
       break;
     case "KeyD":
       if (!gameActive) return;
       tank.move(Direction.RIGHT);
-      handleFlagCapture(flag, tank.position, winModalEl);
+      handleFlagCapture(
+        flag,
+        tank.position,
+        winModalEl,
+        gameActive,
+        controlButtons
+      );
       break;
     case "KeyF":
       if (!gameActive) return;
@@ -179,33 +228,12 @@ btnFDRightEl.addEventListener("click", () => {
 
 // Event Listener - reset
 btnResetEl.addEventListener("click", () => {
-  resetGame();
+  resetGame(gameMap, tank, gameActive, controlButtons);
   hideModal(winModalEl);
 });
 
 // Event Listener - modal reset
 btnModalResetEl.addEventListener("click", () => {
-  resetGame();
+  resetGame(gameMap, tank, gameActive, controlButtons);
   hideModal(winModalEl);
 });
-
-// Game state helpers
-
-function resetGame(): void {
-  gameMap.reset();
-  tank.reset(gameMap.board);
-  gameActive = true;
-  enableControls(controlButtons);
-}
-
-function handleFlagCapture(
-  flag: Pos,
-  tankCurrentPos: Pos,
-  winModalEl: HTMLDivElement
-): void {
-  if (flag.x === tankCurrentPos.x && flag.y === tankCurrentPos.y) {
-    showModal(winModalEl);
-    gameActive = false;
-    disableControls(controlButtons);
-  }
-}
