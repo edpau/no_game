@@ -178,7 +178,7 @@ btnFDRightEl.addEventListener("click", () => {
 });
 
 // ==========================
-// Event Listener - Keyboard
+// Event Listeners - Keyboard
 // ==========================
 window.addEventListener("keydown", (event: KeyboardEvent) => {
   switch (event.code) {
