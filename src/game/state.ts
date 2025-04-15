@@ -7,12 +7,12 @@ import { Pos } from "./types";
 export function resetGame(
   gameMap: GameMap,
   tank: Tank,
-  gameActive: Boolean,
+  gameState: { active: boolean },
   controlButtons: HTMLButtonElement[]
 ): void {
   gameMap.reset();
   tank.reset(gameMap.board);
-  gameActive = true;
+  gameState.active = true;
   enableControls(controlButtons);
 }
 
@@ -20,12 +20,12 @@ export function handleFlagCapture(
   flag: Pos,
   tankCurrentPos: Pos,
   winModalEl: HTMLDivElement,
-  gameActive: boolean,
+  gameState: { active: boolean },
   controlButtons: HTMLButtonElement[]
 ): void {
   if (flag.x === tankCurrentPos.x && flag.y === tankCurrentPos.y) {
     showModal(winModalEl);
-    gameActive = false;
+    gameState.active = false;
     disableControls(controlButtons);
   }
 }

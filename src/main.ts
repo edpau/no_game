@@ -6,10 +6,7 @@ import { Pos } from "./game/types";
 
 import { Direction } from "./game/types";
 import {
-  disableControls,
-  enableControls,
   hideModal,
-  showModal,
 } from "./utility/ui";
 import { handleFlagCapture, resetGame } from "./game/state";
 
@@ -75,38 +72,32 @@ const controlButtons: HTMLButtonElement[] = [
 let gameMap = new GameMap(boardEl);
 const tank = new Tank({ x: 5, y: 8 }, gameMap.board);
 const flag: Pos = gameMap.flag;
-let gameActive: boolean = true;
+let gameState = { active: true };
 
 function handleTankMove(
   direction: Direction,
   tank: Tank,
-  gameActive: boolean,
+  gameState: { active: boolean },
   flag: Pos,
   winModalEl: HTMLDivElement,
   controlButtons: HTMLButtonElement[]
 ) {
-  if (!gameActive) return;
+  if (!gameState.active) return;
   tank.move(direction);
-  handleFlagCapture(
-    flag,
-    tank.position,
-    winModalEl,
-    gameActive,
-    controlButtons
-  );
+  handleFlagCapture(flag, tank.position, winModalEl, gameState, controlButtons);
 }
 
-function handleTankFire(tank: Tank, gameActive: boolean) {
-  if (!gameActive) return;
+function handleTankFire(tank: Tank, gameState: { active: boolean }) {
+  if (!gameState.active) return;
   tank.fireBullet();
 }
 
 function handleTankFireDirection(
   direction: Direction,
   tank: Tank,
-  gameActive: boolean
+  gameState: { active: boolean }
 ) {
-  if (!gameActive) return;
+  if (!gameState.active) return;
   tank.updateFireDirection(direction);
 }
 
@@ -115,7 +106,7 @@ btnUpEl.addEventListener("click", () => {
   handleTankMove(
     Direction.UP,
     tank,
-    gameActive,
+    gameState,
     flag,
     winModalEl,
     controlButtons
@@ -126,7 +117,7 @@ btnDownEl.addEventListener("click", () => {
   handleTankMove(
     Direction.DOWN,
     tank,
-    gameActive,
+    gameState,
     flag,
     winModalEl,
     controlButtons
@@ -137,7 +128,7 @@ btnLeftEl.addEventListener("click", () => {
   handleTankMove(
     Direction.LEFT,
     tank,
-    gameActive,
+    gameState,
     flag,
     winModalEl,
     controlButtons
@@ -148,7 +139,7 @@ btnRightEl.addEventListener("click", () => {
   handleTankMove(
     Direction.RIGHT,
     tank,
-    gameActive,
+    gameState,
     flag,
     winModalEl,
     controlButtons
@@ -156,7 +147,7 @@ btnRightEl.addEventListener("click", () => {
 });
 
 btnFireEl.addEventListener("click", () => {
-  handleTankFire(tank, gameActive);
+  handleTankFire(tank, gameState);
 });
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
@@ -165,7 +156,7 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
       handleTankMove(
         Direction.UP,
         tank,
-        gameActive,
+        gameState,
         flag,
         winModalEl,
         controlButtons
@@ -175,7 +166,7 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
       handleTankMove(
         Direction.DOWN,
         tank,
-        gameActive,
+        gameState,
         flag,
         winModalEl,
         controlButtons
@@ -185,7 +176,7 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
       handleTankMove(
         Direction.LEFT,
         tank,
-        gameActive,
+        gameState,
         flag,
         winModalEl,
         controlButtons
@@ -195,60 +186,57 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
       handleTankMove(
         Direction.RIGHT,
         tank,
-        gameActive,
+        gameState,
         flag,
         winModalEl,
         controlButtons
       );
       break;
     case "KeyF":
-      handleTankFire(tank, gameActive);
+      handleTankFire(tank, gameState);
       break;
 
     // TODO need to make a function to make it simple and it need to be reuse for other tank
     case "KeyI":
-      handleTankFireDirection(Direction.UP, tank, gameActive);
+      handleTankFireDirection(Direction.UP, tank, gameState);
       break;
     case "KeyK":
-      if (!gameActive) return;
-      handleTankFireDirection(Direction.DOWN, tank, gameActive);
+      handleTankFireDirection(Direction.DOWN, tank, gameState);
       break;
     case "KeyJ":
-      if (!gameActive) return;
-      handleTankFireDirection(Direction.LEFT, tank, gameActive);
+      handleTankFireDirection(Direction.LEFT, tank, gameState);
       break;
     case "KeyL":
-      if (!gameActive) return;
-      handleTankFireDirection(Direction.RIGHT, tank, gameActive);
+      handleTankFireDirection(Direction.RIGHT, tank, gameState);
       break;
   }
 });
 
 // Event Listener - fire direction
 btnFDUpEl.addEventListener("click", () => {
-  handleTankFireDirection(Direction.UP, tank, gameActive);
+  handleTankFireDirection(Direction.UP, tank, gameState);
 });
 
 btnFDDownEl.addEventListener("click", () => {
-  handleTankFireDirection(Direction.DOWN, tank, gameActive);
+  handleTankFireDirection(Direction.DOWN, tank, gameState);
 });
 
 btnFDLeftEl.addEventListener("click", () => {
-  handleTankFireDirection(Direction.LEFT, tank, gameActive);
+  handleTankFireDirection(Direction.LEFT, tank, gameState);
 });
 
 btnFDRightEl.addEventListener("click", () => {
-  handleTankFireDirection(Direction.RIGHT, tank, gameActive);
+  handleTankFireDirection(Direction.RIGHT, tank, gameState);
 });
 
 // Event Listener - reset
 btnResetEl.addEventListener("click", () => {
-  resetGame(gameMap, tank, gameActive, controlButtons);
+  resetGame(gameMap, tank, gameState, controlButtons);
   hideModal(winModalEl);
 });
 
 // Event Listener - modal reset
 btnModalResetEl.addEventListener("click", () => {
-  resetGame(gameMap, tank, gameActive, controlButtons);
+  resetGame(gameMap, tank, gameState, controlButtons);
   hideModal(winModalEl);
 });
