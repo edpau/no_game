@@ -5,6 +5,12 @@ import GameMap from "./game/GameMap";
 import { Pos } from "./game/types";
 
 import { Direction } from "./game/types";
+import {
+  disableControls,
+  enableControls,
+  hideModal,
+  showModal,
+} from "./utility/ui";
 
 const boardEl = document.querySelector<HTMLDivElement>(".screen__board");
 const btnUpEl = document.querySelector<HTMLButtonElement>("#dUp");
@@ -189,7 +195,7 @@ function resetGame(): void {
   gameMap.reset();
   tank.reset(gameMap.board);
   gameActive = true;
-  enableControls();
+  enableControls(controlButtons);
 }
 
 function handleFlagCapture(
@@ -200,24 +206,6 @@ function handleFlagCapture(
   if (flag.x === tankCurrentPos.x && flag.y === tankCurrentPos.y) {
     showModal(winModalEl);
     gameActive = false;
-    disableControls();
+    disableControls(controlButtons);
   }
-}
-
-// UI control helpers
-
-function showModal(modal: HTMLDivElement): void {
-  modal.style.display = "flex";
-}
-
-function hideModal(modal: HTMLDivElement): void {
-  modal.style.display = "none";
-}
-
-function disableControls(): void {
-  controlButtons.forEach((btn) => (btn.disabled = true));
-}
-
-function enableControls(): void {
-  controlButtons.forEach((btn) => (btn.disabled = false));
 }
