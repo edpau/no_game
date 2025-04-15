@@ -77,153 +77,168 @@ const tank = new Tank({ x: 5, y: 8 }, gameMap.board);
 const flag: Pos = gameMap.flag;
 let gameActive: boolean = true;
 
-// TODO refactor, repeat code
-// Event Listener - direction btn
-btnUpEl.addEventListener("click", () => {
+function handleTankMove(
+  direction: Direction,
+  tank: Tank,
+  gameActive: boolean,
+  flag: Pos,
+  winModalEl: HTMLDivElement,
+  controlButtons: HTMLButtonElement[]
+) {
   if (!gameActive) return;
-  tank.move(Direction.UP);
+  tank.move(direction);
   handleFlagCapture(
     flag,
     tank.position,
     winModalEl,
     gameActive,
+    controlButtons
+  );
+}
+
+function handleTankFire(tank: Tank, gameActive: boolean) {
+  if (!gameActive) return;
+  tank.fireBullet();
+}
+
+function handleTankFireDirection(
+  direction: Direction,
+  tank: Tank,
+  gameActive: boolean
+) {
+  if (!gameActive) return;
+  tank.updateFireDirection(direction);
+}
+
+// Event Listener - direction btn
+btnUpEl.addEventListener("click", () => {
+  handleTankMove(
+    Direction.UP,
+    tank,
+    gameActive,
+    flag,
+    winModalEl,
     controlButtons
   );
 });
 
 btnDownEl.addEventListener("click", () => {
-  if (!gameActive) return;
-  tank.move(Direction.DOWN);
-  handleFlagCapture(
-    flag,
-    tank.position,
-    winModalEl,
+  handleTankMove(
+    Direction.DOWN,
+    tank,
     gameActive,
+    flag,
+    winModalEl,
     controlButtons
   );
 });
 
 btnLeftEl.addEventListener("click", () => {
-  if (!gameActive) return;
-  tank.move(Direction.LEFT);
-  handleFlagCapture(
-    flag,
-    tank.position,
-    winModalEl,
+  handleTankMove(
+    Direction.LEFT,
+    tank,
     gameActive,
+    flag,
+    winModalEl,
     controlButtons
   );
 });
 
 btnRightEl.addEventListener("click", () => {
-  if (!gameActive) return;
-  tank.move(Direction.RIGHT);
-  handleFlagCapture(
-    flag,
-    tank.position,
-    winModalEl,
+  handleTankMove(
+    Direction.RIGHT,
+    tank,
     gameActive,
+    flag,
+    winModalEl,
     controlButtons
   );
 });
 
 btnFireEl.addEventListener("click", () => {
-  if (!gameActive) return;
-  tank.fireBullet();
+  handleTankFire(tank, gameActive);
 });
 
-// TODO refactor, repeat code
 window.addEventListener("keydown", (event: KeyboardEvent) => {
   switch (event.code) {
     case "KeyW":
-      if (!gameActive) return;
-      tank.move(Direction.UP);
-      handleFlagCapture(
-        flag,
-        tank.position,
-        winModalEl,
+      handleTankMove(
+        Direction.UP,
+        tank,
         gameActive,
+        flag,
+        winModalEl,
         controlButtons
       );
       break;
     case "KeyS":
-      if (!gameActive) return;
-      tank.move(Direction.DOWN);
-      handleFlagCapture(
-        flag,
-        tank.position,
-        winModalEl,
+      handleTankMove(
+        Direction.DOWN,
+        tank,
         gameActive,
+        flag,
+        winModalEl,
         controlButtons
       );
       break;
     case "KeyA":
-      if (!gameActive) return;
-      tank.move(Direction.LEFT);
-      handleFlagCapture(
-        flag,
-        tank.position,
-        winModalEl,
+      handleTankMove(
+        Direction.LEFT,
+        tank,
         gameActive,
+        flag,
+        winModalEl,
         controlButtons
       );
       break;
     case "KeyD":
-      if (!gameActive) return;
-      tank.move(Direction.RIGHT);
-      handleFlagCapture(
-        flag,
-        tank.position,
-        winModalEl,
+      handleTankMove(
+        Direction.RIGHT,
+        tank,
         gameActive,
+        flag,
+        winModalEl,
         controlButtons
       );
       break;
     case "KeyF":
-      if (!gameActive) return;
-      tank.fireBullet();
+      handleTankFire(tank, gameActive);
       break;
 
     // TODO need to make a function to make it simple and it need to be reuse for other tank
     case "KeyI":
-      if (!gameActive) return;
-      tank.updateFireDirection(Direction.UP);
+      handleTankFireDirection(Direction.UP, tank, gameActive);
       break;
     case "KeyK":
       if (!gameActive) return;
-      tank.updateFireDirection(Direction.DOWN);
+      handleTankFireDirection(Direction.DOWN, tank, gameActive);
       break;
     case "KeyJ":
       if (!gameActive) return;
-      tank.updateFireDirection(Direction.LEFT);
+      handleTankFireDirection(Direction.LEFT, tank, gameActive);
       break;
     case "KeyL":
       if (!gameActive) return;
-      tank.updateFireDirection(Direction.RIGHT);
+      handleTankFireDirection(Direction.RIGHT, tank, gameActive);
       break;
   }
 });
 
 // Event Listener - fire direction
-// TODO need to make a function to make it simple and it need to be reuse for other tank
 btnFDUpEl.addEventListener("click", () => {
-  if (!gameActive) return;
-  tank.updateFireDirection(Direction.UP);
+  handleTankFireDirection(Direction.UP, tank, gameActive);
 });
 
 btnFDDownEl.addEventListener("click", () => {
-  if (!gameActive) return;
-  tank.updateFireDirection(Direction.DOWN);
+  handleTankFireDirection(Direction.DOWN, tank, gameActive);
 });
 
 btnFDLeftEl.addEventListener("click", () => {
-  if (!gameActive) return;
-  tank.updateFireDirection(Direction.LEFT);
+  handleTankFireDirection(Direction.LEFT, tank, gameActive);
 });
 
 btnFDRightEl.addEventListener("click", () => {
-  if (!gameActive) return;
-  tank.updateFireDirection(Direction.RIGHT);
+  handleTankFireDirection(Direction.RIGHT, tank, gameActive);
 });
 
 // Event Listener - reset
