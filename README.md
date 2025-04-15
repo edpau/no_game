@@ -388,6 +388,21 @@ button, a {
 }
 ```
 
+### Module State Sharing in JavaScript (I didn't use this solution)
+Problem: I refactored gameActive into a separate state.ts file but mistakenly treated it as a normal variable, causing updates to not reflect across modules.
+
+[Need a better way to share variables among modules](https://www.reddit.com/r/learnjavascript/comments/1dv0qnp/need_a_better_way_to_share_variables_among_modules/)
+
+Solution: I can replace the direct variable export with a module that exposes getter and setter functions. This ensures consistent shared state across all importing modules, since changes made via the setter are reflected wherever the getter is used.
+
+```js
+export const gameState = { active: true };
+
+export function setGameActive(value: boolean) {
+  gameState.active = value;
+}
+```
+
 ### re-render
 
 When re-render whole map happen?
