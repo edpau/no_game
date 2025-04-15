@@ -1,5 +1,5 @@
 import type { Pos } from "../game/types";
-import { delay } from "../utlity/helper";
+import { delay } from "../utility/helper";
 import { Direction } from "../game/types";
 
 export default class Bullet {
