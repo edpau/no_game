@@ -1,4 +1,6 @@
+// ==========================
 // Game state helpers
+// ==========================
 import type Tank from "../components/Tank";
 import { disableControls, enableControls, showModal } from "../utility/ui";
 import type GameMap from "./GameMap";

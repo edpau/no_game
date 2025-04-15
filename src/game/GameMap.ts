@@ -13,7 +13,6 @@ const gameMap: number[][] = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
-// throw error if there is more than one 3 in the gameMap
 
 const squareClassNames: Record<number, string> = {
   0: "board__square--road",
@@ -33,9 +32,6 @@ export default class GameMap {
     try {
       this.#flag = this.flagPos(gameMap);
     } catch (error) {
-      // TODO take away this line in production
-      console.error("Map initialization failed:", error);
-
       const errorMsg = document.createElement("div");
       if (error instanceof Error) {
         errorMsg.textContent = error.message;
