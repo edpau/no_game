@@ -23,10 +23,10 @@ const squareClassNames: Record<number, string> = {
 
 export default class GameMap {
   #board: HTMLDivElement[][] = [];
-  #boardEl: HTMLDivElement;
+  #boardEl: HTMLElement;
   #flag: Pos;
 
-  constructor(boardEl: HTMLDivElement) {
+  constructor(boardEl: HTMLElement) {
     this.#boardEl = boardEl;
 
     try {
@@ -44,7 +44,7 @@ export default class GameMap {
     this.#board = this.create(this.#boardEl);
   }
 
-  create(boardEl: HTMLDivElement): HTMLDivElement[][] {
+  create(boardEl: HTMLElement): HTMLDivElement[][] {
     const board: HTMLDivElement[][] = [];
     gameMap.forEach((row) => {
       const rowEl = document.createElement("div");

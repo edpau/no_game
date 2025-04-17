@@ -9,7 +9,7 @@ import { handleFlagCapture, resetGame } from "./game/state";
 // ==========================
 // DOM Element References
 // ==========================
-const boardEl = document.querySelector<HTMLDivElement>(".screen__board");
+const boardEl = document.querySelector<HTMLElement>(".screen__board");
 const btnUpEl = document.querySelector<HTMLButtonElement>("#dUp");
 const btnDownEl = document.querySelector<HTMLButtonElement>("#dDown");
 const btnLeftEl = document.querySelector<HTMLButtonElement>("#dLeft");
