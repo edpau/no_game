@@ -17,6 +17,9 @@ $color-boardWall-dark: #e07000;
 $color-screenBg-light: $color-boardRoad-light;
 $color-screenBg-dark: $color-boardRoad-dark;
 
+$color-controllerLabel-light: #202e20;
+$color-controllerLabel-dark: #202e20;
+
 $color-btn-disabled-light: #545353fe;
 $color-btn-disabled-dark: #545353fe;
 
@@ -62,6 +65,8 @@ $color-modalText-dark: #202e20;
   --color-boardRoad: #{$color-boardRoad-light};
   --color-boardWall: #{$color-boardWall-light};
 
+  --color-controllerLabel: #{$color-controllerLabel-light};
+
   --color-btn-disabled: #{$color-btn-disabled-light};
 
   --color-dBtn: #{$color-dBtn-light};
@@ -92,6 +97,8 @@ $color-modalText-dark: #202e20;
 
   --color-boardRoad: #{$color-boardRoad-dark};
   --color-boardWall: #{$color-boardWall-dark};
+
+  --color-controllerLabel: #{$color-controllerLabel-dark};
 
   --color-btn-disabled: #{$color-btn-disabled-dark};
 
