@@ -11,7 +11,7 @@
     &--move {
       display: block;
       grid-row: 2/3;
-      grid-column: 2/8;
+      grid-column: 2/9;
     }
     &--fire {
       display: block;
@@ -39,11 +39,11 @@
     transition: background-color 0.2s ease, transform 0.1s ease,
       box-shadow 0.2s ease;
 
-    &:hover {
+    &:not(:disabled):hover {
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
 
-    &:active {
+    &:not(:disabled):active {
       transform: scale(0.97);
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
     }
@@ -59,7 +59,7 @@
     &--dRight {
       background-color: var(--color-dBtn);
 
-      &:hover {
+      &:not(:disabled):hover {
         background-color: var(--color-dBtn-hover);
       }
 
@@ -94,11 +94,11 @@
     &--fDRight {
       background-color: var(--color-fDBtn);
 
-      &:hover {
+      &:not(:disabled):hover {
         background-color: var(--color-fDBtn-hover);
       }
 
-      &:active {
+      &:not(:disabled):active {
         background-color: var(--color-fDBtn-active);
       }
     }
@@ -128,11 +128,11 @@
       grid-row: 6/7;
       grid-column: 11/12;
 
-      &:hover {
+      &:not(:disabled):hover {
         background-color: var(--color-fireBtn-hover);
       }
 
-      &:active {
+      &:not(:disabled):active {
         background-color: var(--color-fireBtn-active);
       }
     }
