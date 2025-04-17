@@ -1,6 +1,6 @@
 <svg width="90" height="90" xmlns="http://www.w3.org/2000/svg">
   <!-- Dark grey background -->
-  <rect width="90" height="90" fill="#D1D1D1" />
+  <rect width="90" height="90" fill="#5C5C5C" />
   <!-- Light grey square centered -->
-  <rect x="15" y="15" width="60" height="60" fill="#F2F2F2" />
+  <rect x="15" y="15" width="60" height="60" fill="#CFCFCF" />
 </svg>

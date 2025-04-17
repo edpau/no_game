@@ -1,5 +1,7 @@
+@use "../variables" as vars;
+
 .tank {
-  background-color: #e6e6b5;
+  background-color: var(--color-boardRoad);
   background-image: url("/public/icons/tank.svg");
   background-size: cover;
   background-repeat: repeat;

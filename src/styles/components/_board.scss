@@ -1,37 +1,37 @@
-.board {
-    &__row {
-      display: flex;
-    }
-  
-    &__square {
-      width: calc(100% / 10);
-      aspect-ratio: 1/1;
-  
-      &--road {
-        background-color: #E6E6B5;
-      }
-      &--boundary {
-        background-color: grey;
-        background-image: url("/public/icons/boundary.svg");
-        background-size: cover;
-        background-repeat: repeat;
-      }
-      &--wall {
-        background-color: #ED7700;
-        background-image: url("/public/icons/wall.svg");
-        background-size: cover;
-        background-repeat: repeat;
-      }
-      &--flag {
-        background-color: #E6E6B5;
-        background-image: url("/public/icons/flag.svg");
-        background-size: cover;
-        background-repeat: repeat;
+@use "../variables" as vars;
 
-      }
-      &--error {
-        background-color: red;
-      }
+.board {
+  &__row {
+    display: flex;
+  }
+
+  &__square {
+    width: calc(100% / 10);
+    aspect-ratio: 1/1;
+
+    &--road {
+      background-color: var(--color-boardRoad);
+    }
+    &--boundary {
+      background-color: var(--color-boardRoad);
+      background-image: url("/public/icons/boundary.svg");
+      background-size: cover;
+      background-repeat: repeat;
+    }
+    &--wall {
+      background-color: var(--color-boardWall);
+      background-image: url("/public/icons/wall.svg");
+      background-size: cover;
+      background-repeat: repeat;
+    }
+    &--flag {
+      background-color: var(--color-boardRoad);
+      background-image: url("/public/icons/flag.svg");
+      background-size: cover;
+      background-repeat: repeat;
+    }
+    &--error {
+      background-color: red;
     }
   }
-  
+}

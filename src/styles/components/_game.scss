@@ -1,21 +1,20 @@
+@use "../variables" as vars;
+
 .game {
+  margin: 0 auto;
+
+  &__screen {
     margin: 0 auto;
-    border: 1px solid black;
-  
-    &__screen {
-      margin: 0 auto;
-      position: relative;
-      width: 80%;
-      aspect-ratio: 1/1;
-      border: 5px solid red;
-      background-color: #e6e6b5;
-    }
-  
-    &__controller {
-      border: 5px solid green;
-      margin: 0 auto;
-      width: 80%;
-      aspect-ratio: 1/1;
-    }
+    position: relative;
+    width: 80%;
+    aspect-ratio: 1/1;
+    background-color: var(--color-screen-bg);
   }
-  
+
+  &__controller {
+    background-color: var(--color-controller-bg);
+    margin: 0 auto;
+    width: 80%;
+    aspect-ratio: 1/1;
+  }
+}

@@ -1,13 +1,13 @@
+@use "../variables" as vars;
+
 .controller {
   display: grid;
   grid-template-columns: repeat(14, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  
 
   &__label {
     display: none;
     font-size: clamp(1rem, -1.15rem + 10.8vw, 1.875rem);
-    // font-size: 10px;
     &--move {
       display: block;
       grid-row: 2/3;
@@ -23,17 +23,49 @@
       grid-row: 10/11;
       grid-column: 6/9;
     }
+
+  }
+
+  &__theme-toggle{
+    grid-row: 11/12;
+    grid-column: 11/12;
   }
 
   &__btn {
     width: 100%;
     height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.1s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+    }
+
+    &:disabled {
+      background-color: grey;
+      box-shadow: none;
+    }
 
     &--dUp,
     &--dDown,
     &--dLeft,
     &--dRight {
-      background-color: black;
+      background-color: var(--color-dBtn);
+
+      &:hover {
+        background-color: var(--color-dBtn-hover);
+      }
+
+      &:active {
+        background-color: var(--color-dBtn-active);
+      }
     }
 
     &--dUp {
@@ -60,7 +92,15 @@
     &--fDDown,
     &--fDLeft,
     &--fDRight {
-      background-color: orange;
+      background-color: var(--color-fDBtn);
+
+      &:hover {
+        background-color: var(--color-fDBtn-hover);
+      }
+
+      &:active {
+        background-color: var(--color-fDBtn-active);
+      }
     }
 
     &--fDUp {
@@ -84,15 +124,31 @@
     }
 
     &--fire {
-      background-color: red;
+      background-color: var(--color-fireBtn);
       grid-row: 6/7;
       grid-column: 11/12;
+
+      &:hover {
+        background-color: var(--color-fireBtn-hover);
+      }
+
+      &:active {
+        background-color: var(--color-fireBtn-active);
+      }
     }
 
     &--reset {
-      background-color: blue;
+      background-color: var(--color-resetBtn);
       grid-row: 11/12;
       grid-column: 7/9;
+
+      &:hover {
+        background-color: var(--color-resetBtn-hover);
+      }
+
+      &:active {
+        background-color: var(--color-resetBtn-active);
+      }
     }
   }
 }

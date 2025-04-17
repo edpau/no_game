@@ -3,73 +3,114 @@ $font-secondary: "Oxygen mono", monospace;
 $font-size: 1rem;
 $font-weight: 400;
 
-$color-navBg-light: white;
-$color-navBg-dark: black;
+$color-bg-light: #5286a1;
+$color-bg-dark: #324e61;
 
-$color-heading-light: black;
-$color-text-light: black;
-$color-bg-light: white;
+$color-controllerBg-light: #d1d3d1;
+$color-controllerBg-dark: #b5b5b5;
 
-$color-heading-dark: white;
-$color-text-dark: white;
-$color-bg-dark: black;
+$color-boardRoad-light: #e6e6b5;
+$color-boardRoad-dark: #d6d6a9;
+$color-boardWall-light: #ed7700;
+$color-boardWall-dark: #e07000;
 
-$card-imageBg-light: #e2f6f5;
-$card-imageBg-dark: grey;
+$color-screenBg-light: $color-boardRoad-light;
+$color-screenBg-dark: $color-boardRoad-dark;
 
-$color-skillsSVG-light: black;
-$color-skillsSVG-dark: white;
+$color-btn-disabled-light: #545353fe;
+$color-btn-disabled-dark: #545353fe;
 
+$color-dBtn-light: #2e2e2e;
+$color-dBtn-dark: #2e2e2e;
+$color-dBtn-hover-light: #575757;
+$color-dBtn-hover-dark: #575757;
+$color-dBtn-active-light: #000000;
+$color-dBtn-active-dark: #000000;
 
-$color-footerBg-light: black;
-$color-footerBg-dark: white;
-$color-footerText-light: white;
-$color-footerText-dark: black;
-$color-footerSvgBg-light: white;
-$color-footerSvgBg-dark: black;
-$color-footerSvg-light: black;
-$color-footerSvg-dark: white;
+$color-fDBtn-light: #008001;
+$color-fDBtn-dark: #009100;
+$color-fDBtn-hover-light: #00d400;
+$color-fDBtn-hover-dark: #00b300;
+$color-fDBtn-active-light: #007800;
+$color-fDBtn-active-dark: #008700;
 
-$color-hover-light: orange;
-$color-hover-dark: grey;
+$color-fireBtn-light: #ff0000;
+$color-fireBtn-dark: #ff0000;
+$color-fireBtn-hover-light: #f76565;
+$color-fireBtn-hover-dark: #f76565;
+$color-fireBtn-active-light: #9e0303;
+$color-fireBtn-active-dark: #9e0303;
+
+$color-resetBtn-light: #2e2e2e;
+$color-resetBtn-dark: #2e2e2e;
+$color-resetBtn-hover-light: #575757;
+$color-resetBtn-hover-dark: #575757;
+$color-resetBtn-active-light: #000000;
+$color-resetBtn-active-dark: #000000;
+
+$color-modalContentBg-light: #ebe1a0;
+$color-modalContentBg-dark: #ebe1a0;
+$color-modalText-light: #202e20;
+$color-modalText-dark: #202e20;
 
 :root {
-  --color-heading: #{$color-heading-light};
-  --color-text: #{$color-text-light};
-
   --color-bg: #{$color-bg-light};
 
-  --color-navBg: #{$color-navBg-light};
+  --color-screen-bg: #{$color-screenBg-light};
+  --color-controller-bg: #{$color-controllerBg-light};
 
-  --card-imageBg: #{$card-imageBg-light};
+  --color-boardRoad: #{$color-boardRoad-light};
+  --color-boardWall: #{$color-boardWall-light};
 
-  --color-skillsSvg: #{$color-skillsSVG-light};
+  --color-btn-disabled: #{$color-btn-disabled-light};
 
-  --color-footerBg: #{$color-footerBg-light};
-  --color-footerText: #{$color-footerText-light};
-  --color-footerSvgBg: #{$color-footerSvgBg-light};
-  --color-footerSvg: #{$color-footerSvg-light};
+  --color-dBtn: #{$color-dBtn-light};
+  --color-dBtn-hover: #{$color-dBtn-hover-light};
+  --color-dBtn-active: #{$color-dBtn-active-light};
 
-  --color-hover: #{$color-hover-light};
+  --color-fDBtn: #{$color-fDBtn-light};
+  --color-fDBtn-hover: #{$color-fDBtn-hover-light};
+  --color-fDBtn-active: #{$color-fDBtn-active-light};
+
+  --color-fireBtn: #{$color-fireBtn-light};
+  --color-fireBtn-hover: #{$color-fireBtn-hover-light};
+  --color-fireBtn-active: #{$color-fireBtn-active-light};
+
+  --color-resetBtn: #{$color-resetBtn-light};
+  --color-resetBtn-hover: #{$color-resetBtn-hover-light};
+  --color-resetBtn-active: #{$color-resetBtn-active-light};
+
+  --color-modalContentBg: #{$color-modalContentBg-light};
+  --color-modalText: #{$color-modalText-light};
 }
 
 [data-theme="dark"] {
-  --color-heading: #{$color-heading-dark};
-  --color-text: #{$color-text-dark};
-
   --color-bg: #{$color-bg-dark};
 
-  --color-navBg: #{$color-navBg-dark};
+  --color-screen-bg: #{$color-screenBg-dark};
+  --color-controller-bg: #{$color-controllerBg-dark};
 
-  --card-imageBg: #{$card-imageBg-dark};
+  --color-boardRoad: #{$color-boardRoad-dark};
+  --color-boardWall: #{$color-boardWall-dark};
 
-  --color-skillsSvg: #{$color-skillsSVG-dark};
+  --color-btn-disabled: #{$color-btn-disabled-dark};
 
-  --color-footerBg: #{$color-footerBg-dark};
-  --color-footerText: #{$color-footerText-dark};
-  --color-footerSvgBg: #{$color-footerSvgBg-dark};
-  --color-footerSvg: #{$color-footerSvg-dark};
+  --color-dBtn: #{$color-dBtn-dark};
+  --color-dBtn-hover: #{$color-dBtn-hover-dark};
+  --color-dBtn-active: #{$color-dBtn-active-dark};
 
-  --color-hover: #{$color-hover-dark};
+  --color-fDBtn: #{$color-fDBtn-dark};
+  --color-fDBtn-hover: #{$color-fDBtn-hover-dark};
+  --color-fDBtn-active: #{$color-fDBtn-active-dark};
+
+  --color-fireBtn: #{$color-fireBtn-dark};
+  --color-fireBtn-hover: #{$color-fireBtn-hover-dark};
+  --color-fireBtn-active: #{$color-fireBtn-active-dark};
+
+  --color-resetBtn: #{$color-resetBtn-dark};
+  --color-resetBtn-hover: #{$color-resetBtn-hover-dark};
+  --color-resetBtn-active: #{$color-resetBtn-active-dark};
+
+  --color-modalContentBg: #{$color-modalContentBg-dark};
+  --color-modalText: #{$color-modalText-light};
 }
-
