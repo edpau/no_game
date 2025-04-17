@@ -32,7 +32,7 @@
 
 - 🕹️ Use **W A S D** or the **on-screen move pad** to move your tank
 - 🎯 Use **I J K L** or the **on screen fire pad** to aim your tank’s cannon
-- 🔫 Press **F** or the **Fire button** to shoot bullets
+- 🔫 Press **F** or the **on screen fire button** to shoot bullets
 - 🚩 Your goal is to **navigate the tank to the flag** and capture it
 - 🧱 You can shoot through **walls** to clear paths
 - 🔁 Press the **Reset** button to restart the game
