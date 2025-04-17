@@ -1,4 +1,4 @@
-# Game- Tank to the Flag
+# Game- Tank to the flag
 
 ## Table of contents
 
@@ -101,6 +101,6 @@
 - [ ] Change index.html title
 - [ ] Change index.html fibicon
 - [ ] add back accessibility on button
-- [ ] write readMe with a short intro to the project.
-- [ ]move plan into a different file and link to the project
 - [ ]Redesign reset button
+- [ ] change font style
+- [ ] add back varaibale to scsc
