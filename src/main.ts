@@ -1,4 +1,5 @@
 import "./styles/main.scss";
+import "./utility/theme";
 import Tank from "./components/Tank";
 import GameMap from "./game/GameMap";
 import { Pos } from "./game/types";
